@@ -3,9 +3,40 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>최진욱 멤버 소개 페이지</title>
+
+	<style>
+		div#introduce-card {
+			width: 800px;
+			border: 2px black solid;
+		}
+	
+	</style>
 </head>
 <body>
-	
+	<div id="introduce-card">
+	</div>
+
+	<script>
+
+		//데이터 불러오기
+		let imageURL = 'https://www.shutterstock.com/image-photo/happy-man-standing-on-road-600w-2275817317.jpg';
+		let name = '최진욱';
+		let age = '20';
+		let mbti = 'xyzw';
+
+		let cardHtml = `
+			<p> <img src=${imageURL}> </p>
+			<hr>
+			<p> 이름: ${name} </p>
+			<p> 나이: ${age} </p>
+			<p> 성격: ${mbti} </p>
+		`;
+
+		//카드 자리에 카드 HTML 붙이기
+		let card = document.getElementById("introduce-card");
+		card.innerHTML = cardHtml;
+	</script>
 </body>
 </html>
