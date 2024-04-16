@@ -1,42 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>최진욱 멤버 소개 페이지</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 	<style>
-		div#introduce-card {
-			width: 800px;
-			border: 2px black solid;
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-evenly;
 		}
-	
+
+		header {
+			width: 100%;
+			height: 20vh;
+			background-image: url('https://t3.ftcdn.net/jpg/07/51/04/92/360_F_751049221_q8PE5clWh1m1bx2YUH37r3PQHpGfOqCY.jpg');
+			background-size: cover;
+		}
+
+		div#introduce-card {
+			margin: 3vh 0px;
+		}
+
+		nav#links {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+		}
 	</style>
+
 </head>
+
 <body>
+	<header>
+	</header>
+
 	<div id="introduce-card">
 	</div>
 
-	<script>
+	<footer>
+	</footer>
 
-		//데이터 불러오기
+	<script>
+		//데이터 설정
 		let imageURL = 'https://www.shutterstock.com/image-photo/happy-man-standing-on-road-600w-2275817317.jpg';
 		let name = '최진욱';
 		let age = '20';
 		let mbti = 'xyzw';
+		let url1 = 'https://www.naver.com';
+		let label1 = '블로그';
+		let url2 = 'https://www.github.com';
+		let label2 = '깃허브';
 
-		let cardHtml = `
-			<p> <img src=${imageURL}> </p>
-			<hr>
-			<p> 이름: ${name} </p>
-			<p> 나이: ${age} </p>
-			<p> 성격: ${mbti} </p>
-		`;
+		//navProp과 cardProp 설정
+		let navProps = [
+			{ url: url1, label: label1 },
+			{ url: url2, label: label2 }
+		];
 
-		//카드 자리에 카드 HTML 붙이기
+		let cardProps = {
+			imageURL, name, age, mbti, navProps
+		};
+
+		//카드 만들기
+		let cardHtml = cardComponent(cardProps);
+
+		//카드 붙이기
 		let card = document.getElementById("introduce-card");
 		card.innerHTML = cardHtml;
+
+		function cardComponent(props) {
+			return `
+			<div class="card" style="max-width:60vw;">
+				<img src=${props.imageURL} class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">팀원을 소개합니다.</h5>
+						<p> 이름: ${props.name} </p>
+						<p> 나이: ${props.age} </p>
+						<p> 성격: ${props.mbti} </p>
+						${navComponent(props.navProps)}
+						<a href="index.html" class="btn btn-primary">메인 페이지로</a>
+					</div>
+			</div>`;
+		}
+
+		function navComponent(props) {
+			let navHtml = '';
+			navHtml += '<nav id="links">';
+			props.forEach(data => {
+				navHtml += `
+					<a href=${data.url}> 
+						<button class="btn btn-warning"> 
+							${data.label}
+						</button>
+					</a>`;
+			});
+			navHtml += '</nav>';
+			return navHtml;
+		}
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
 </html>
