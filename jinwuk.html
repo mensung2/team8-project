@@ -72,66 +72,7 @@
 
 	</script>
 
-	<noscript>
-		//데이터 설정
-		let imageURL = 'https://www.shutterstock.com/image-photo/happy-man-standing-on-road-600w-2275817317.jpg';
-		let name = '최진욱';
-		let age = '50';
-		let mbti = 'xyzw';
-		let url1 = 'https://www.naver.com';
-		let label1 = '블로그';
-		let url2 = 'https://www.github.com';
-		let label2 = '깃허브';
-
-		//navProp과 cardProp 설정
-		let navProps = [
-		{ url: url1, label: label1 },
-		{ url: url2, label: label2 }
-		];
-
-		let cardProps = {
-		imageURL, name, age, mbti, navProps
-		};
-
-		//카드 만들기
-		let cardHtml = cardComponent(cardProps);
-
-		//카드 붙이기
-		let card = document.getElementById("introduce-card");
-		card.innerHTML = cardHtml;
-
-		function cardComponent(props) {
-		return `
-		<div class="card" style="max-width:60vw;">
-			<img src=${props.imageURL} class="card-img-top">
-			<div class="card-body">
-				<h5 class="card-title">팀원을 소개합니다.</h5>
-				<p> 이름: ${props.name} </p>
-				<p> 나이: ${props.age} </p>
-				<p> 성격: ${props.mbti} </p>
-				${navComponent(props.navProps)}
-				<a href="index.html" class="btn btn-primary">메인 페이지로</a>
-			</div>
-		</div>`;
-		}
-
-		function navComponent(props) {
-		let navHtml = '';
-		navHtml += '<nav id="links">';
-			props.forEach(data => {
-			navHtml += `
-			<a href=${data.url}>
-				<button class="btn btn-warning">
-					${data.label}
-				</button>
-			</a>`;
-			});
-			navHtml += '
-		</nav>';
-		return navHtml;
-		}
-		</script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
