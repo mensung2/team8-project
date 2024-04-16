@@ -49,7 +49,7 @@ main {
 }
 
 #comment-right-section {
-	width: 10%;
+	width: 15%;
 }
 
 #comment-print-section {
@@ -122,6 +122,20 @@ main {
 #comment-left-section {
 	display: flex;
 	flex-direction: column;
+}
+
+#comment-content-section {
+	width: 100%;
+}
+
+#comment-right-section>div:first-child {
+	display: flex;
+	justify-content: center;
+}
+
+#comment-right-section>div:nth-child(2) {
+	display: flex;
+	justify-content: space-evenly;
 }
 
 #comment-print-section {
