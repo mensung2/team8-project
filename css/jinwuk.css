@@ -1,4 +1,6 @@
-/* 크기 설정 */
+/*****************
+    크기 설정 
+*****************/
 body {
 	width: 1920px;
 	height: 1080px;
@@ -44,7 +46,9 @@ main {
 	height: 150px;
 }
 
-/* display 설정 */
+/******************
+    display 설정 
+*****************/
 body {
 	display: flex;
 	justify-content: center;
