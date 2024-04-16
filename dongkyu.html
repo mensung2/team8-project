@@ -1,1 +1,105 @@
-dw
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8조</title>
+ 
+  <link rel="stylesheet" href="./css/dongkyu.css">
+
+    
+ 
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="discovery1">
+     
+    </div>
+
+    <div class="discovery2">
+      <h1>
+        양동규
+      </h1>
+
+      <h3>
+        안녕하세요
+      </h3>
+    </div>
+
+    <div class="discovery3">
+      #wdw #ewe
+    </div>
+    
+    <div class = "discovery4">
+      <div class="card-footer">
+        <form onsubmit="addComment(event)">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="댓글을 입력하세요"  required > 
+            <button type="submit" class="btn btn-primary">작성</button>
+          </div>
+        </form>
+        <div class="comments mt-3">
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+<script>
+ function addComment(event) {
+  event.preventDefault();
+  const commentInput = event.target.querySelector("input");
+  const commentText = commentInput.value;
+  const date = new Date().toLocaleString();
+
+  const commentDiv = document.createElement("div");
+  commentDiv.className = "card my-3";
+
+  const cardBodyDiv = document.createElement("div");
+  cardBodyDiv.className = "card-body";
+
+  cardBodyDiv.innerHTML = `
+    <p class="card-text">${commentText} <span class="comment-time">${date}</span></p>
+    <div class="comment-buttons">
+      <button class="btn btn-sm btn-primary edit-btn">수정</button>
+      <button class="btn btn-sm btn-danger delete-btn">삭제</button>
+    </div>
+  `;
+
+  commentDiv.appendChild(cardBodyDiv);
+
+  const commentsDiv = event.target.parentNode.querySelector(".comments");
+  commentsDiv.insertBefore(commentDiv, commentsDiv.firstChild);
+
+  commentInput.value = "";
+
+  // 수정 버튼에 이벤트 리스너 추가
+  const editBtn = commentDiv.querySelector(".edit-btn");
+  editBtn.addEventListener("click", function() {
+    var newText = prompt("댓글을 수정하세요:", commentText);
+    if (newText !== null && newText.trim() !== "") {
+      commentText = newText;
+      cardBodyDiv.querySelector(".card-text").textContent = commentText;
+    }
+  });
+  
+  // 삭제 버튼에 이벤트 리스너 추가
+  const deleteBtn = commentDiv.querySelector(".delete-btn");
+  deleteBtn.addEventListener("click", function() {
+    const confirmDelete = confirm("정말로 삭제하시겠습니까?");
+    if (confirmDelete) {
+      commentDiv.remove();
+    }
+  });
+}
+
+
+
+</script>
+
+
+</body>
+</html>
