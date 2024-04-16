@@ -109,6 +109,10 @@ main {
 	grid-area: 2 / 2 / span 2 / span 2
 }
 
+#comment-content-div {
+	overflow-y: scroll;
+}
+
 #comment-content-div span {
 	display: inline-block;
 	width: 80%

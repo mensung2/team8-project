@@ -24,7 +24,7 @@ const commentComponent = createComment({ text: "첫번째 댓글" });
 const commentContainer = document.getElementById('comment-content-div');
 commentContainer.append(commentComponent);
 
-function handleDeleteComment(event) {
+function handleClickDeleteButton(event) {
 	console.log('delete');
 	//삭제 후 댓글이 0개면 댓글 표시 UI 끄기
 
@@ -33,29 +33,41 @@ function handleDeleteComment(event) {
 	//DB에서 삭제
 }
 
-function handleWriteComment(event) {
-	console.log(event);
+function handleClickWriteButton(event) {
+	//입력필드 요소 불러오기
+	const commentInputField = document.getElementById("comment-input");
 
-	//데이터 불러오기
-	const comment = {};
+	//To-do: 입력필드 길이 검사하기
 
-	//컴포넌트 만들기
-	const commentComponent = createComment({});
+	//입력필드 데이터 불러오기
+	const commentText = commentInputField.value;
+	const commentData = { text: commentText };
 
-	//문서에 저장
-	const commentContainer = document.getElementById('con');
+	//입력필드 값 초기화하기
+	commentInputField.value = "";
+
+	//댓글창 요소 불러오기
+	const commentContainer = document.getElementById('comment-content-div');
+
+	//댓글 컴포넌트 만들기
+	const commentComponent = createComment(commentData);
+
+	//댓글창에 댓글 컴포넌트 붙이기
 	commentContainer.append(commentComponent);
 
-	//댓글이 0개였다가 1개가 된 것이면 댓글표시 UI 키기
+	//댓글창을 댓글이 보이도록 스크롤
+	commentComponent.scrollIntoView();
+
+	//댓글이 0개였다가 1개가 된 경우 댓글표시 UI 키기
 	if (!commentContainer.children.length) {
 		toggleCommentUI(true);
 	}
 
 	//DB에 저장
-	db.writeComment(comment);
+	db.writeComment(commentData);
 }
 
-function handleModifyComment(event) {
+function handleClickModifyButton(event) {
 	console.log('modify');
 
 	//문서에 반영
@@ -114,14 +126,14 @@ function createComment(comment) {
 		innerText: comment.text,
 	}, {
 		tagName: 'button',
-		innerText: '댓글 삭제',
+		innerText: '삭제',
 		eventType: 'click',
-		eventHandler: handleDeleteComment,
+		eventHandler: handleClickDeleteButton,
 	}, {
 		tagName: 'button',
-		innerText: '댓글 수정',
+		innerText: '수정',
 		eventType: 'click',
-		eventHandler: handleModifyComment,
+		eventHandler: handleClickModifyButton,
 	}];
 
 	//댓글 내용, 삭제, 수정 버튼을 붙일 메인 컴포넌트
@@ -133,7 +145,7 @@ function createComment(comment) {
 		//서브컴포넌트 정보를 사용해서 서브컴포넌트를 생성한다.
 		const subc = document.createElement(info.tagName);
 		subc.innerText = info.innerText;
-		if(info.eventType) {
+		if (info.eventType) {
 			subc.addEventListener(info.eventType, info.eventHandler)
 		}
 		//메인컴포넌트에 서브컴포넌트를 자식으로 붙인다.
@@ -171,15 +183,15 @@ function getEventHandlerMap() {
 	return [{
 		targetClass: 'delete-button',
 		eventType: 'click',
-		handlerFn: handleDeleteComment,
+		handlerFn: handleClickDeleteButton,
 	}, {
 		targetClass: 'write-button',
 		eventType: 'click',
-		handlerFn: handleWriteComment,
+		handlerFn: handleClickWriteButton,
 	}, {
 		targetClass: 'modify-button',
 		eventType: 'click',
-		handlerFn: handleModifyComment,
+		handlerFn: handleClickModifyButton,
 	}];
 }
 
