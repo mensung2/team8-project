@@ -1,80 +1,95 @@
-.wrap{
-    background-color: white;
-    width: 70%;
-    max-width: 1920px;
-    
-    margin: 0 auto;
-   
-  
-    font-family: 'Noto Sans KR', sans-serif;}
-  
-   
-    .discovery1 {
-      width: 500px;
-      height: 700px;
-      background-color: lightblue;
-      float: left; 
-      
-    }
-  
-    .discovery2 {
-      width: 800px;
-      height: 600px;
-      background-color: lightblue;
-      float: right; 
-      list-style-type: none;
-  
-    }
-  
-    .discovery3 {
-      width: 800px;
-      height: 50px;
-      background-color: lightblue;
-      float: right; 
-      margin-top: 50px;
-  
-    }
-  
-    .discovery4 {
-      width: 1000px;
-      height: 150px;
-      background-color: lightblue;
-      float: right; 
-      margin-top: 3%;
-      margin-right: 10%;
-    }
-  
-  
-    .form-group{
-      text-align: center;
-      margin-top: 20px;
-    }
-  
-    .form-control {
-      width: 800px;
-      height: 30px;
-    }
-  
-    .comments {
-      font-size: 14px;
-      font-weight: 500px;
-      margin: 0 auto; /* 가운데 정렬을 위한 margin */
-      max-width: 800px; /* 댓글의 최대 너비 설정 */
-      width: 100%; /* 너비를 100%로 설정하여 작은 화면에서도 가운데 정렬 유지 */
-    }
-  
-    .comment-time {
-      font-size: 10px;
-      
-    }
-  
-    .edit-btn,
-    .delete-btn {
-      float: right; 
-      font-size: 8px; /* 버튼의 글꼴 크기를 작게 설정합니다. */
-      padding: 3px 3px;
-    } 
-  
-    .comment-buttons {
-      float: right; /* 버튼을 오른쪽으로 이동시킵니다. */
-    }
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width:70%;
+  max-width: 1920px;
+  margin: 0 auto;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  margin-top: 50px;
+}
+
+
+
+.photo {
+  width: 500px;
+  height: 700px;
+  background-color: rgb(121, 149, 177);
+}
+
+.test{
+  flex-direction: column;
+}
+
+.introduce{
+  width: 800px;
+  height: 600px;
+  background-color: rgb(121, 149, 177);
+  margin-left: 50px;
+  margin-top: -21px;
+}
+
+
+.hashtag {
+  width: 800px;
+  height: 50px;
+  background-color: rgb(121, 149, 177);
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.footer {
+  display: flex;
+}
+
+.comment {
+  margin-top: 50px;
+  background-color: rgb(121, 149, 177);
+  width: 1000px;
+}
+
+
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 800px;
+  height: 30px;
+}
+
+.comments {
+  font-size: 14px;
+  font-weight: 500px;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.comment-time {
+  font-size: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  font-size: 8px;
+  padding: 3px 3px;
+}
+
+.comment-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
