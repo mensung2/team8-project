@@ -13,7 +13,8 @@ if (commentData.length) {
 	toggleCommentUI(true);
 }
 
-
+(document.getElementById('write-button')
+		.addEventListener('click', handleClickWriteButton));
 
 /***************
  핸들러 관련 함수
@@ -135,6 +136,8 @@ function createCommentComponent(comment) {
 		subc.commentId = commentId;
 	});
 
+	console.log(mainComponent);
+
 	return mainComponent;
 }
 
@@ -152,8 +155,6 @@ function processCommentData(commentData) {
 
 //db에서 불러온 댓글 데이터를 배열로 반환한다
 function loadCommentData(db) {
-	console.log('load');
-
 	return loadDummyData();
 
 	function loadDummyData() {
@@ -168,8 +169,8 @@ function loadCommentData(db) {
 }
 
 function attachCommentToContainer(commentComponent){
-	document.getElementById("comment-content-div")
-			.append(commentComponent);
+	(document.getElementById("comment-content-div")
+				.append(commentComponent));
 
 	commentComponent.scrollIntoView();
 }
