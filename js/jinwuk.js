@@ -1,28 +1,18 @@
 console.log("jinwuk.js loaded");
 
-const db = loadDb();
-const comments = loadComment(db);
+const db = createDBInstance();
+const commentData = loadCommentData(db);
 
-//db에서 가져온 댓글 있으면
+//db에서 가져온 댓글이 있으면
 //댓글을 화면에 표시하고 댓글관련 UI를 킨다.
-if (!comments.length) {
-	processComment(comments);
+if (commentData.length) {
+	processCommentData(commentData);
 	toggleCommentUI(true);
 }
 
-//댓글 작성 버튼과 각 댓글의 삭제, 수정 버튼의 이벤트 리스터를 설정한다.
-const eventHandlerMap = getEventHandlerMap();
-eventHandlerMap.forEach(entry => {
-	addEventListenerByClass(
-		entry.targetClass, entry.eventType, entry.handlerFn
-	)
-});
-
 //테스트용 댓글 생성
-const commentComponent = createComment({ text: "첫번째 댓글" });
-
-const commentContainer = document.getElementById('comment-content-div');
-commentContainer.append(commentComponent);
+const commentComponent = createCommentComponent({ text: "첫번째 댓글" });
+attachCommentToContainer(commentComponent);
 
 function handleClickDeleteButton(event) {
 	console.log('delete');
@@ -41,25 +31,21 @@ function handleClickWriteButton(event) {
 
 	//입력필드 데이터 불러오기
 	const commentText = commentInputField.value;
-	const commentData = { text: commentText };
 
 	//입력필드 값 초기화하기
 	commentInputField.value = "";
 
-	//댓글창 요소 불러오기
-	const commentContainer = document.getElementById('comment-content-div');
+	//댓글 데이터 구성
+	const commentData = { text: commentText };
 
 	//댓글 컴포넌트 만들기
-	const commentComponent = createComment(commentData);
+	const commentComponent = createCommentComponent(commentData);
 
 	//댓글창에 댓글 컴포넌트 붙이기
-	commentContainer.append(commentComponent);
+	attachCommentToContainer(commentComponent);
 
-	//댓글창을 댓글이 보이도록 스크롤
-	commentComponent.scrollIntoView();
-
-	//댓글이 0개였다가 1개가 된 경우 댓글표시 UI 키기
-	if (!commentContainer.children.length) {
+	//To-do: 댓글이 0개였다가 1개가 된 경우 댓글표시 UI 키기
+	if (false) {
 		toggleCommentUI(true);
 	}
 
@@ -75,7 +61,7 @@ function handleClickModifyButton(event) {
 	//DB에 반영
 }
 
-function loadDb() {
+function createDBInstance() {
 	const db = {};
 
 	db.writeComment = dbWriteComment;
@@ -98,24 +84,30 @@ function dbModifyCommentAtDB(comment) {
 }
 
 //db에서 불러온 댓글 데이터를 배열 형식으로 반환한다
-function loadComment(db) {
+function loadCommentData(db) {
 	console.log('load');
 
 	return loadDummyComment();
 
 	function loadDummyComment() {
 		return [
+			{ text: "안녕하세요" },
+			{ text: "hello hello" },
+			{ text: "let's goooo" },
+			{ text: "리액트" },
+			{ text: "자바스크립트" },
 		];
 	}
 }
 
-function processComment(comments) {
-	comments.forEach(comment => {
-		createComment(comment);
+function processCommentData(commentData) {
+	commentData.forEach(data => {
+		const commentComp = createCommentComponent(data);
+		attachCommentToContainer(commentComp);
 	});
 }
 
-function createComment(comment) {
+function createCommentComponent(comment) {
 	//댓글 식별 아이디 생성
 	const commentId = Symbol('commentId');
 
@@ -136,13 +128,14 @@ function createComment(comment) {
 		eventHandler: handleClickModifyButton,
 	}];
 
-	//댓글 내용, 삭제, 수정 버튼을 붙일 메인 컴포넌트
+	//메인 컴포넌트 생성
+	//메인 컴포넌트가 서브컴포넌트들을 하나로 묶는다.
 	const mainComponent = document.createElement('div');
 	mainComponent.setAttribute("className", "a-comment");
 	mainComponent.commentId = commentId;
 
 	subComponentMap.forEach(info => {
-		//서브컴포넌트 정보를 사용해서 서브컴포넌트를 생성한다.
+		//서브컴포넌트 정보로 서브컴포넌트를 생성한다.
 		const subc = document.createElement(info.tagName);
 		subc.innerText = info.innerText;
 		if (info.eventType) {
@@ -155,6 +148,13 @@ function createComment(comment) {
 	});
 
 	return mainComponent;
+}
+
+function attachCommentToContainer(commentComponent){
+	document.getElementById("comment-content-div")
+			.append(commentComponent);
+
+	commentComponent.scrollIntoView();
 }
 
 function toggleCommentUI(forceHide) {
@@ -172,28 +172,7 @@ function toggleCommentUI(forceHide) {
 	}
 }
 
-function addEventListenerByClass(className, eventType, handlerFn) {
-	const elems = document.getElementsByClassName(className);
-	Array.from(elems).forEach((elem) =>
-		elem.addEventListener(eventType, handlerFn)
-	);
-}
 
-function getEventHandlerMap() {
-	return [{
-		targetClass: 'delete-button',
-		eventType: 'click',
-		handlerFn: handleClickDeleteButton,
-	}, {
-		targetClass: 'write-button',
-		eventType: 'click',
-		handlerFn: handleClickWriteButton,
-	}, {
-		targetClass: 'modify-button',
-		eventType: 'click',
-		handlerFn: handleClickModifyButton,
-	}];
-}
 
 function getConfigurationData() {
 	return {
