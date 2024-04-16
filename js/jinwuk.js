@@ -1,5 +1,5 @@
 /**************
-   메인 로직
+	메인 로직
 **************/
 console.log("jinwuk.js loaded");
 
@@ -13,8 +13,15 @@ if (commentData.length) {
 	toggleCommentUI(true);
 }
 
+/*********************
+  이벤트 핸들러 등록
+*********************/
 (document.getElementById('write-button')
-		.addEventListener('click', handleClickWriteButton));
+	.addEventListener('click', handleClickWriteButton));
+
+(document.getElementById('back-button')
+	.addEventListener('click', handleClickBackeButton));
+
 
 /***************
  핸들러 관련 함수
@@ -66,7 +73,10 @@ function handleClickModifyButton(event) {
 	//DB에 반영
 }
 
-
+function handleClickBackeButton(event){
+	//To-do
+	document.location.href = "./index.html";
+}
 
 /***************
   DB 관련 함수
@@ -74,14 +84,14 @@ function handleClickModifyButton(event) {
 function createDBInstance() {
 	const db = {};
 
-	db.writeComment = dbWriteComment;
+	db.writeComment = dbWriteCommentAtDB;
 	db.deleteComment = dbDeleteCommentAtDB;
 	db.modifyComment = dbModifyCommentAtDB;
 
 	return db;
 }
 
-function dbWriteComment(comment) {
+function dbWriteCommentAtDB(comment) {
 
 }
 
@@ -92,6 +102,8 @@ function dbDeleteCommentAtDB(comment) {
 function dbModifyCommentAtDB(comment) {
 
 }
+
+
 
 /******************
  컴포넌트 관련 함수
@@ -168,9 +180,9 @@ function loadCommentData(db) {
 	}
 }
 
-function attachCommentToContainer(commentComponent){
+function attachCommentToContainer(commentComponent) {
 	(document.getElementById("comment-content-div")
-				.append(commentComponent));
+		.append(commentComponent));
 
 	commentComponent.scrollIntoView();
 }
