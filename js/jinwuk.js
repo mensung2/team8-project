@@ -1,3 +1,6 @@
+/*************
+  메인 로직
+*************/
 console.log("jinwuk.js loaded");
 
 const db = createDBInstance();
@@ -10,10 +13,12 @@ if (commentData.length) {
 	toggleCommentUI(true);
 }
 
-//테스트용 댓글 생성
-const commentComponent = createCommentComponent({ text: "첫번째 댓글" });
-attachCommentToContainer(commentComponent);
 
+
+
+/***************
+ 핸들러 관련 함수
+****************/
 function handleClickDeleteButton(event) {
 	console.log('delete');
 	//삭제 후 댓글이 0개면 댓글 표시 UI 끄기
@@ -61,6 +66,11 @@ function handleClickModifyButton(event) {
 	//DB에 반영
 }
 
+
+
+/***************
+  DB 관련 함수
+****************/
 function createDBInstance() {
 	const db = {};
 
@@ -83,30 +93,9 @@ function dbModifyCommentAtDB(comment) {
 
 }
 
-//db에서 불러온 댓글 데이터를 배열 형식으로 반환한다
-function loadCommentData(db) {
-	console.log('load');
-
-	return loadDummyComment();
-
-	function loadDummyComment() {
-		return [
-			{ text: "안녕하세요" },
-			{ text: "hello hello" },
-			{ text: "let's goooo" },
-			{ text: "리액트" },
-			{ text: "자바스크립트" },
-		];
-	}
-}
-
-function processCommentData(commentData) {
-	commentData.forEach(data => {
-		const commentComp = createCommentComponent(data);
-		attachCommentToContainer(commentComp);
-	});
-}
-
+/******************
+ 컴포넌트 관련 함수
+*******************/
 function createCommentComponent(comment) {
 	//댓글 식별 아이디 생성
 	const commentId = Symbol('commentId');
@@ -150,6 +139,35 @@ function createCommentComponent(comment) {
 	return mainComponent;
 }
 
+
+
+/***************************
+ 데이터 가공 및 유틸리티 함수
+****************************/
+function processCommentData(commentData) {
+	commentData.forEach(data => {
+		const commentComp = createCommentComponent(data);
+		attachCommentToContainer(commentComp);
+	});
+}
+
+//db에서 불러온 댓글 데이터를 배열로 반환한다
+function loadCommentData(db) {
+	console.log('load');
+
+	return loadDummyData();
+
+	function loadDummyData() {
+		return [
+			{ text: "안녕하세요" },
+			{ text: "hello hello" },
+			{ text: "let's goooo" },
+			{ text: "리액트" },
+			{ text: "자바스크립트" },
+		];
+	}
+}
+
 function attachCommentToContainer(commentComponent){
 	document.getElementById("comment-content-div")
 			.append(commentComponent);
@@ -171,8 +189,6 @@ function toggleCommentUI(forceHide) {
 		return;
 	}
 }
-
-
 
 function getConfigurationData() {
 	return {
