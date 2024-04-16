@@ -1,6 +1,6 @@
-/*************
-  메인 로직
-*************/
+/**************
+   메인 로직
+**************/
 console.log("jinwuk.js loaded");
 
 const db = createDBInstance();
@@ -12,7 +12,6 @@ if (commentData.length) {
 	processCommentData(commentData);
 	toggleCommentUI(true);
 }
-
 
 
 
