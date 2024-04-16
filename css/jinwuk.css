@@ -44,30 +44,6 @@ main {
 	height: 150px;
 }
 
-#comment-top-section {
-	height: 25%;
-}
-
-#comment-bottom-section {
-	height: 70%;
-}
-
-#comment-top-section input {
-	width: 80%
-}
-
-#comment-top-section button {
-	height: 90%
-}
-
-#comment-print-section {
-	height: 100%;
-}
-
-#comment-content-section {
-	height: 100%;
-}
-
 /* display 설정 */
 body {
 	display: flex;
