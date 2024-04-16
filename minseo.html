@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소개 페이지</title>
+    <style>
+        .main {
+            width: 1400px;
+            margin: 100px auto 0px auto;
+        }
+
+        .top {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .middle {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            background-color: black;
+        }
+
+        .left {
+            width: 500px;
+            height: 600px;
+            background-color: antiquewhite;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            background-color: gray;
+        }
+
+        .text {
+            width: 800px;
+            height: 500px;
+            background-color: bisque;
+        }
+
+        .tag {
+            width: 800px;
+            height: 50px;
+            background-color: bisque;
+        }
+
+        .comment {
+            display: flex;
+            justify-content: center;
+            background-color: bisque;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="top">
+            <button>작성</button>
+        </div>
+        <div class="middle">
+            <div class="left"></div>
+            <div class="right">
+                <div class="text">내용</div>
+                <div class="tag">해시태그</div>
+            </div>
+        </div>
+        <div class="bottom">
+            <ul class="comment">
+                <form id="commentFrm">
+                    <span class="ps_box">
+                        <input type="text" placeholder="댓글 내용을 입력해주세요." class="int" name="content" />
+                    </span>
+                    <button type="button" class="btn btn-danger">기록하기</button>
+                </form>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
