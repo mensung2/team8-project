@@ -104,7 +104,17 @@ main {
 	grid-template-columns: 1fr 80% 12%;
 }
 
+#comment-content-div {
+	/* row-start / col-start / row-end / col-end */
+	grid-area: 2 / 2 / span 2 / span 2
+}
+
+#comment-content-div span {
+	display: inline-block;
+	width: 80%
+}
+
 /* 테스트용 */
-* {
+* :not(html) {
 	border: rgb(160, 160, 255) solid 1px;
 }
