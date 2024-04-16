@@ -44,12 +44,20 @@ main {
 	height: 150px;
 }
 
-#comment-left-section {
-	width: 80%;
+#comment-top-section {
+	height: 25%;
 }
 
-#comment-right-section {
-	width: 15%;
+#comment-bottom-section {
+	height: 70%;
+}
+
+#comment-top-section input {
+	width: 80%
+}
+
+#comment-top-section button {
+	height: 90%
 }
 
 #comment-print-section {
@@ -115,34 +123,12 @@ main {
 }
 
 #comment-div {
-	display: flex;
-	justify-content: space-evenly;
-}
-
-#comment-left-section {
-	display: flex;
-	flex-direction: column;
-}
-
-#comment-content-section {
-	width: 100%;
-}
-
-#comment-right-section>div:first-child {
-	display: flex;
-	justify-content: center;
-}
-
-#comment-right-section>div:nth-child(2) {
-	display: flex;
-	justify-content: space-evenly;
-}
-
-#comment-print-section {
-	display: flex;
+	display: grid;
+	grid-template-rows: 1fr 4fr;
+	grid-template-columns: 1fr 80% 12%;
 }
 
 /* 테스트용 */
 * {
-	border: black solid 1px;
+	border: rgb(160, 160, 255) solid 1px;
 }
