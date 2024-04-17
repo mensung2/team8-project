@@ -13,11 +13,17 @@
   margin: 0 auto;
   font-family: 'Noto Sans KR', sans-serif;
 }
-
+.header{
+  margin-top: 20px;
+  color: rgb(121, 149, 177);
+  
+  font-weight: bolder;
+  font-size: 35px
+}
 .main {
   display: flex;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 
@@ -26,22 +32,16 @@
   position: relative;
   width: 500px;
   height: 700px;
-  background-color: rgb(121, 149, 177);
-
-  border: solid;
-  border-width: 2px;
-  border-color: black;
-
-  box-shadow: 10px 10px 20px gray;  
+  background-color: rgb(121, 149, 177); 
 }
 
 
-.ins{
+.git{
   position: absolute;
   margin-left: 445px;
   bottom: 0.15em;
 }
-.ins img:hover,
+.git img:hover,
 .vel img:hover {
   transform: scale(1.1);
 }
@@ -60,27 +60,54 @@
 .introduce{
   width: 800px;
   height: 600px;
-  background-color: rgb(121, 149, 177);
+  background-color: white;
   margin-left: 50px;
-
-  
-
-  box-shadow: 10px 10px 30px gray;  
+  }
+.myself{
+  margin-top: 50px;
+  margin-left: 40px;
 }
+.front{
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(102, 141, 180);
+}
+
+.end{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.img{
+  position: relative;
+  background-image: url(/image/메모지2.png);                                                               
+  background-size: cover;
+  width: 680px;
+  height: 350px;
+  background-size: cover; 
+}
+
+.img .content{
+  position: absolute;
+  width: 70%;
+  top:57%;
+  left:50%; 
+  transform: translate(-50%, -50%);                                                                   
+  font-size:14px;
+  color: black;
+  z-index: 2;
+}
+
 
 
 .hashtag {
   width: 800px;
   height: 50px;
-  background-color: rgb(121, 149, 177);
+  color: rgb(121, 149, 177);
   margin-top: 44px;
   margin-left: 50px;
   display: flex;
   align-items: center;
-  
- 
-
-  box-shadow: 10px 10px 20px gray;
 }
 
 .footer {
@@ -92,7 +119,6 @@
   background-color: rgb(121, 149, 177);
   width: 1000px;
 
-  box-shadow: 10px 10px 20px gray;
 }
 
 
