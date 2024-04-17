@@ -122,6 +122,12 @@ main {
 	grid-template-columns: 1fr 80% 12%;
 }
 
+#comment-div > b {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 #comment-content-div {
 	/* row-start / col-start / row-end / col-end */
 	grid-area: 2 / 2 / span 2 / span 2
