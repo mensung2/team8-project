@@ -27,12 +27,24 @@ if (commentData.length) {
  핸들러 관련 함수
 ****************/
 function handleClickDeleteButton(event) {
-	console.log('delete');
-	//삭제 후 댓글이 0개면 댓글 표시 UI 끄기
+	//클릭된 삭제버튼과 연결된 댓글 컴포넌트 불러오기
+	const commentComp = event.target.parentElement;
 
-	//문서에서 삭제
+	//댓글 정보 추출
+	const commentData = commentComp.querySelector("span").innerText;	
 
-	//DB에서 삭제
+	//댓글 정보 DB에서 삭제
+	db.deleteComment(commentData);
+	
+	//댓글 컴포넌트 문서에서 삭제
+	commentComp.remove();
+
+	//To-do: 삭제 후 댓글이 0개가 된 경우 댓글 표시 UI 끄기
+	if(false) {
+		toggleCommentUI(true)
+	}
+
+	alert("삭제가 완료되었습니다.")
 }
 
 function handleClickWriteButton(event) {
@@ -74,7 +86,6 @@ function handleClickModifyButton(event) {
 }
 
 function handleClickBackeButton(event){
-	//To-do
 	document.location.href = "./index.html";
 }
 
@@ -102,8 +113,6 @@ function dbDeleteCommentAtDB(comment) {
 function dbModifyCommentAtDB(comment) {
 
 }
-
-
 
 /******************
  컴포넌트 관련 함수
@@ -147,8 +156,6 @@ function createCommentComponent(comment) {
 		//서브컴포넌트에도 댓글식별 번호를 설정한다.
 		subc.commentId = commentId;
 	});
-
-	console.log(mainComponent);
 
 	return mainComponent;
 }
