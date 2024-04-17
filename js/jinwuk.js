@@ -11,7 +11,7 @@ const commentData = loadCommentData(db);
 //댓글을 화면에 표시하고 댓글관련 UI를 킨다.
 if (commentData.length) {
 	processCommentData(commentData);
-	toggleCommentUI(true);
+	setCommentUIVisibility(true);
 }
 
 /*********************
@@ -78,9 +78,9 @@ function handleClickDeleteButton(event) {
 	//댓글 컴포넌트 문서에서 삭제
 	commentComp.remove();
 
-	//To-do: 삭제 후 댓글이 0개가 된 경우 댓글 표시 UI 끄기
-	if (false) {
-		toggleCommentUI(true)
+	//삭제 후 댓글이 0개가 된 경우 댓글 표시 UI 끄기
+	if (getCommentNumber() === 0) {
+		setCommentUIVisibility(false)
 	}
 
 	alert("삭제가 완료되었습니다.")
@@ -107,9 +107,9 @@ function handleClickWriteButton(event) {
 	//댓글창에 댓글 컴포넌트 붙이기
 	attachCommentToContainer(commentComponent);
 
-	//To-do: 댓글이 0개였다가 1개가 된 경우 댓글표시 UI 키기
-	if (false) {
-		toggleCommentUI(true);
+	//댓글이 0개였다가 1개가 된 경우 댓글표시 UI 키기
+	if (getCommentNumber() === 1) {
+		setCommentUIVisibility(true);
 	}
 
 	//DB에 저장
@@ -162,6 +162,8 @@ function handleClickModifyButton(event) {
 function handleClickBackButton(event) {
 	document.location.href = "./index.html";
 }
+
+
 
 /*****************
   DB 관련 함수들
@@ -216,7 +218,7 @@ function createCommentComponent(comment) {
 	//메인 컴포넌트 생성
 	//역할: 아래 forEach에서 서브컴포넌트들을 하나로 묶을 것이다.
 	const mainComponent = document.createElement('div');
-	mainComponent.setAttribute("className", "a-comment");
+	mainComponent.setAttribute("class", "a-comment");
 	mainComponent.commentId = commentId;
 
 	subComponentMap.forEach(info => {
@@ -272,17 +274,22 @@ function attachCommentToContainer(commentComponent) {
 	commentComponent.scrollIntoView();
 }
 
-function toggleCommentUI(forceHide) {
-	if (forceHide === undefined) {
-		//토글
-		return;
-	}
+function getCommentNumber() {
+	console.dir(document.querySelectorAll('.a-comment'));
 
-	if (forceHide) {
-		//숨기기
+	return document.querySelectorAll('.a-comment').length
+}
+
+function setCommentUIVisibility(visible) {
+	setVisibility(document.getElementById("comment-ui"), visible);
+}
+
+function setVisibility(targetElem, visible) {
+	if (visible) {
+		targetElem.removeAttribute('hidden');
 		return;
 	} else {
-		//켜기
+		targetElem.setAttribute('hidden', "");
 		return;
 	}
 }

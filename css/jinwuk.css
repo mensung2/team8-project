@@ -128,6 +128,13 @@ main {
 	align-items: center;
 }
 
+#comment-div > #comment-ui {
+	display: flex;
+	justify-content: right;
+	
+	padding-right: 5px;
+}
+
 #comment-content-div {
 	/* row-start / col-start / row-end / col-end */
 	grid-area: 2 / 2 / span 2 / span 2
