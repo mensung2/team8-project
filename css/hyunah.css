@@ -2,11 +2,12 @@
 body {
     margin: 0;
     box-sizing: border-box;
+
 }
 .wrap {
-    background-color: rgb(255, 255, 255);
-    max-width: 1920px;
+    background-color: rgb(184, 199, 251);
     margin: 0 auto;
+    height: auto;
     margin-top: 100px;
 
     .center {
@@ -23,27 +24,50 @@ body {
         .main {
             width: 800px;
             height: 600px;
+            display: flex;
             flex-direction: column;
-            justify-content: space-evenly;
+            justify-content: space-between;
         
             .profile {
                 background-color: lavender;
                 width: 800px;
                 height: 500px;
                 border: 1px solid black;
-                margin-bottom: 50px;
+                box-sizing: border-box; 
+
+                .pro-p {
+                    font-size: 20px;
+                }
             }
             .hashtag {
-                background-color: lavender;
+                background-color: rgb(230, 230, 250);
                 width: 800px;
                 height: 50px;
                 border: 1px solid black;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                .hash {
+                    margin: 0 auto;
+                }
+                
             }
-    .comment {
-        margin: 0 auto; 
-        max-width: 800px; 
-        width: 100%;
-    }
         }
+    }
+    .comment {
+        background-color: aqua;
+        display: flex;
+        justify-content: center;
+        width: 1350px;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+        margin: 50px;
+        font-size: 1.5em;
+        font-weight: bolder;
+        line-height: 24px;
+
     }
 }
