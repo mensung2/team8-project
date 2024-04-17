@@ -20,6 +20,9 @@ if (commentData.length) {
 document.getElementById('write-button')
 	.addEventListener('click', handleClickWriteButton);
 
+document.getElementById('comment-input')
+	.addEventListener('keyup', handleKeyupInputField);
+
 document.getElementById('back-button')
 	.addEventListener('click', handleClickBackButton);
 
@@ -65,34 +68,13 @@ function createLayoutOutlineHandler() {
 	return _handleLayoutOutlineHandler;
 }
 
-function handleClickDeleteButton(event) {
-	//클릭된 삭제버튼과 연결된 댓글 컴포넌트 불러오기
-	const commentComp = event.target.parentElement;
-
-	//댓글 정보 추출
-	const commentData = commentComp.querySelector("span").innerText;
-
-	//댓글 정보 DB에서 삭제
-	db.deleteComment(commentData);
-
-	//댓글 컴포넌트 문서에서 삭제
-	commentComp.remove();
-
-	//삭제 후 댓글이 0개가 된 경우 댓글 표시 UI 끄기
-	if (getCommentNumber() === 0) {
-		setCommentUIVisibility(false)
-	}
-
-	alert("삭제가 완료되었습니다.")
-}
-
-function handleClickWriteButton(event) {
+function handleClickWriteButton() {
 	const commentInputField = document.getElementById("comment-input");
 
 	const inputFieldText = commentInputField.value;
 
-	const {valid, code} = validateText(inputFieldText);
-	if(!valid) {
+	const { valid, code } = validateText(inputFieldText);
+	if (!valid) {
 		//유효하지 않은 이유 출력
 		alert(getMessageOfCode(code));
 
@@ -117,8 +99,15 @@ function handleClickWriteButton(event) {
 	commentInputField.focus();
 }
 
+function handleKeyupInputField(event) {
+	if(event.key === 'Enter') {
+		handleClickWriteButton();
+		return;
+	}
+}
+
 function handleClickModifyButton(event) {
-	//To-do: 이미 수정 버튼을 눌러서 수정가능한 상태인 경우 처리
+	//To-do: 이미 수정 버튼을 눌러서 수정가능한 경우의 처리
 
 	//수정버튼과 연결된 댓글내용 HTML요소
 	const span = event.target.parentElement.querySelector('span');
@@ -126,12 +115,12 @@ function handleClickModifyButton(event) {
 	span.contentEditable = true;
 	span.focus();
 
-	//To-do: Range 사용하여 커서를 맨 끝으로 커서 이동
+	//To-do: Range 사용하여 커서를 맨 끝으로 이동
 
 	span.addEventListener('keyup', handleKeyup);
 	span.addEventListener('keydown', handleKeydown);
 
-	//To-do: 수정완료 버튼 동적으로 추가
+	//To-do: 수정완료 버튼 추가
 	
 	function handleKeyup(event) {
 		if (event.key === 'Enter' && !event.shift) {
@@ -162,6 +151,24 @@ function handleClickModifyButton(event) {
 			event.preventDefault();
 		}
 	}
+}
+
+function handleClickDeleteButton(event) {
+	//클릭된 삭제버튼과 연결된 댓글 컴포넌트 불러오기
+	const commentComp = event.target.parentElement;
+
+	//댓글 정보 추출
+	const commentData = commentComp.querySelector("span").innerText;
+
+	db.deleteComment(commentData);
+
+	commentComp.remove();
+
+	if (getCommentNumber() === 0) {
+		setCommentUIVisibility(false)
+	}
+
+	alert("삭제가 완료되었습니다.")
 }
 
 function handleClickBackButton(event) {
@@ -199,11 +206,9 @@ function dbModifyCommentAtDB(comment) {
  컴포넌트 관련 함수들
 *********************/
 function createCommentComponent(comment) {
-	//댓글 식별 아이디 생성
 	const commentId = Symbol('commentId');
 
-	//댓글의 서브컴포넌트(댓글 내용, 삭제, 수정 버튼)
-	//생성 시 사용할 정보
+	//댓글의 서브컴포넌트(댓글 내용, 삭제, 수정 버튼) 정보
 	const subComponentMap = [{
 		tagName: 'span',
 		innerText: comment.text,
@@ -220,14 +225,13 @@ function createCommentComponent(comment) {
 		eventHandler: handleClickModifyButton,
 	}];
 
-	//메인 컴포넌트 생성
-	//역할: 아래 forEach에서 서브컴포넌트들을 하나로 묶을 것이다.
+	//메인 컴포넌트
+	//역할: 아래 forEach에서 서브컴포넌트들을 하나로 묶는다.
 	const mainComponent = document.createElement('div');
 	mainComponent.setAttribute("class", "a-comment");
 	mainComponent.commentId = commentId;
 
 	subComponentMap.forEach(info => {
-		//서브컴포넌트 정보로 서브컴포넌트를 생성한다.
 		const subc = document.createElement(info.tagName);
 		subc.innerText = info.innerText;
 		if (info.eventType) {
@@ -236,9 +240,9 @@ function createCommentComponent(comment) {
 		if (info.className) {
 			subc.setAttribute("class", info.className)
 		}
-		//메인컴포넌트에 서브컴포넌트를 자식으로 붙인다.
+
 		mainComponent.appendChild(subc);
-		//서브컴포넌트에도 댓글식별 번호를 설정한다.
+
 		subc.commentId = commentId;
 	});
 
