@@ -1,8 +1,8 @@
 /****************
-	메인 로직
+	 메인 로직
 *****************/
 
-console.log("jinwuk.js loaded");
+console.log('jinwuk.js loaded');
 
 const db = createDBInstance(); //미구현
 const commentData = loadCommentData(db);
@@ -36,8 +36,8 @@ document.addEventListener('keyup', createLayoutOutlineHandler());
 function createLayoutOutlineHandler() {
 	let turnedOn = false;
 
-	const cssRule = "* { outline: rgb(160, 160, 255) solid 1px;}";
-	const styleElemId = "devOutlineStyle";
+	const cssRule = '* { outline: rgb(160, 160, 255) solid 1px;}';
+	const styleElemId = 'devOutlineStyle';
 
 	function _handleLayoutOutlineHandler(event) {
 		//ctrl+shift+q를 누르면 레이아웃 아웃라인 표시
@@ -69,7 +69,7 @@ function createLayoutOutlineHandler() {
 }
 
 function handleClickWriteButton() {
-	const commentInputField = document.getElementById("comment-input");
+	const commentInputField = document.getElementById('comment-input');
 
 	const inputFieldText = commentInputField.value;
 
@@ -82,11 +82,12 @@ function handleClickWriteButton() {
 		return;
 	}
 
-	commentInputField.value = "";
+	commentInputField.value = '';
 
 	const commentData = { text: inputFieldText };
 	const commentComponent = createCommentComponent(commentData);
 	attachCommentToContainer(commentComponent);
+	commentComponent.scrollIntoView();
 
 	db.writeComment(commentData);
 
@@ -94,7 +95,7 @@ function handleClickWriteButton() {
 		setCommentUIVisibility(true);
 	}
 
-	alert("작성이 완료되었습니다.");
+	alert('작성이 완료되었습니다.');
 
 	commentInputField.focus();
 }
@@ -141,13 +142,13 @@ function handleClickModifyButton(event) {
 			span.removeEventListener('keydown', handleKeydown);
 			span.removeEventListener('keyup', handleKeyup);
 
-			alert("수정이 완료되었습니다.");
+			alert('수정이 완료되었습니다.');
 		}
 	}
 
 	function handleKeydown(event) {
 		//줄바꿈 문자 입력 방지
-		if (event.key === "Enter") {
+		if (event.key === 'Enter') {
 			event.preventDefault();
 		}
 	}
@@ -158,7 +159,7 @@ function handleClickDeleteButton(event) {
 	const commentComp = event.target.parentElement;
 
 	//댓글 정보 추출
-	const commentData = commentComp.querySelector("span").innerText;
+	const commentData = commentComp.querySelector('span').innerText;
 
 	db.deleteComment(commentData);
 
@@ -168,11 +169,11 @@ function handleClickDeleteButton(event) {
 		setCommentUIVisibility(false)
 	}
 
-	alert("삭제가 완료되었습니다.")
+	alert('삭제가 완료되었습니다.')
 }
 
 function handleClickBackButton(event) {
-	document.location.href = "./index.html";
+	document.location.href = './index.html';
 }
 
 
@@ -212,7 +213,7 @@ function createCommentComponent(comment) {
 	const subComponentMap = [{
 		tagName: 'span',
 		innerText: comment.text,
-		className: "a-comment-text",
+		className: 'a-comment-text',
 	}, {
 		tagName: 'button',
 		innerText: '삭제',
@@ -228,7 +229,7 @@ function createCommentComponent(comment) {
 	//메인 컴포넌트
 	//역할: 아래 forEach에서 서브컴포넌트들을 하나로 묶는다.
 	const mainComponent = document.createElement('div');
-	mainComponent.setAttribute("class", "a-comment");
+	mainComponent.setAttribute('class', 'a-comment');
 	mainComponent.commentId = commentId;
 
 	subComponentMap.forEach(info => {
@@ -238,7 +239,7 @@ function createCommentComponent(comment) {
 			subc.addEventListener(info.eventType, info.eventHandler)
 		}
 		if (info.className) {
-			subc.setAttribute("class", info.className)
+			subc.setAttribute('class', info.className)
 		}
 
 		mainComponent.appendChild(subc);
@@ -258,6 +259,7 @@ function processCommentData(commentData) {
 	commentData.forEach(data => {
 		const commentComp = createCommentComponent(data);
 		attachCommentToContainer(commentComp);
+		commentComp.scrollIntoView();
 	});
 }
 
@@ -267,20 +269,18 @@ function loadCommentData(db) {
 
 	function loadDummyData() {
 		return [
-			{ text: "안녕하세요" },
-			{ text: "hello hello" },
+			{ text: '안녕하세요' },
+			{ text: 'hello hello' },
 			{ text: "let's goooo" },
-			{ text: "리액트" },
-			{ text: "자바스크립트" },
+			{ text: '리액트' },
+			{ text: '자바스크립트' },
 		];
 	}
 }
 
 function attachCommentToContainer(commentComponent) {
-	(document.getElementById("comment-content-div")
-		.append(commentComponent));
-
-	commentComponent.scrollIntoView();
+	document.getElementById('comment-content-div')
+		.append(commentComponent);
 }
 
 function getCommentNumber() {
@@ -288,7 +288,7 @@ function getCommentNumber() {
 }
 
 function setCommentUIVisibility(visible) {
-	setVisibility(document.getElementById("comment-ui"), visible);
+	setVisibility(document.getElementById('comment-ui'), visible);
 }
 
 function setVisibility(targetElem, visible) {
@@ -296,7 +296,7 @@ function setVisibility(targetElem, visible) {
 		targetElem.removeAttribute('hidden');
 		return;
 	} else {
-		targetElem.setAttribute('hidden', "");
+		targetElem.setAttribute('hidden', '');
 		return;
 	}
 }
@@ -323,11 +323,11 @@ function validateText(text) {
 
 function analyzeText(text){
 	if(text.length === 0) {
-		return "empty";
+		return 'empty';
 	} else if(text.includes('나쁜말')) {
-		return "bad-word";
+		return 'bad-word';
 	} else {
-		return "ok";
+		return 'ok';
 	}
 }
 
