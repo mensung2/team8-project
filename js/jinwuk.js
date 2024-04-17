@@ -1,6 +1,6 @@
-/**************
+/****************
 	메인 로직
-**************/
+*****************/
 
 console.log("jinwuk.js loaded");
 
@@ -23,21 +23,49 @@ document.getElementById('write-button')
 document.getElementById('back-button')
 	.addEventListener('click', handleClickBackButton);
 
-//ctrl+shift+q를 누르면 레이아웃 아웃라인 표시
-//To-do 한 번 더 누르면 레이아웃 아웃라인 숨기기
-document.addEventListener('keyup', (event) => {
-	console.dir(event);
-	if (event.shiftKey && event.ctrlKey
-		&& event.key.toLowerCase() === 'q') {
-		const ss = document.styleSheets[0];
-		ss.insertRule(`* { outline: rgb(160, 160, 255) solid 1px;}`
-			, ss.cssRules.length);
-	}
-});
+document.addEventListener('keyup', handleLayoutOutlineHandler);
 
-/***************
- 핸들러 관련 함수
-****************/
+
+
+/*****************
+	핸들러 함수들
+******************/
+
+function handleLayoutOutlineHandler(event) {
+	let turnedOn = false;
+	const cssRule = "* { outline: rgb(160, 160, 255) solid 1px;}";
+	const styleElemId = "devOutlineStyle";
+
+	function _handleLayoutOutlineHandler(event) {
+		//ctrl+shift+q를 누르면 레이아웃 아웃라인 표시
+		if (event.shiftKey && event.ctrlKey
+			&& event.key.toLowerCase() === 'q') {
+			//이미 표시된 상태면 숨기기
+			if (turnedOn) {
+				const styleElem = document.getElementById(styleElemId);
+
+				styleElem.remove();
+
+				turnedOn = false;
+			}
+			//표시되지 않은 상태면 표시하기
+			else {
+				const styleElem = document.createElement('style');
+
+				styleElem.innerHTML = cssRule;
+				styleElem.setAttribute('id', styleElemId);
+
+				document.head.appendChild(styleElem);
+
+				turnedOn = true;
+			}
+		}
+	}
+
+	return _handleLayoutOutlineHandler(event);
+}
+
+
 function handleClickDeleteButton(event) {
 	//클릭된 삭제버튼과 연결된 댓글 컴포넌트 불러오기
 	const commentComp = event.target.parentElement;
@@ -136,9 +164,9 @@ function handleClickBackButton(event) {
 	document.location.href = "./index.html";
 }
 
-/***************
-  DB 관련 함수
-****************/
+/*****************
+  DB 관련 함수들
+******************/
 function createDBInstance() {
 	const db = {};
 
@@ -161,9 +189,9 @@ function dbModifyCommentAtDB(comment) {
 
 }
 
-/******************
- 컴포넌트 관련 함수
-*******************/
+/*******************
+ 컴포넌트 관련 함수들
+********************/
 function createCommentComponent(comment) {
 	//댓글 식별 아이디 생성
 	const commentId = Symbol('commentId');
@@ -209,9 +237,9 @@ function createCommentComponent(comment) {
 
 
 
-/***************************
- 데이터 가공 및 유틸리티 함수
-****************************/
+/*****************************
+ 데이터 가공 및 유틸리티 함수들
+******************************/
 function processCommentData(commentData) {
 	commentData.forEach(data => {
 		const commentComp = createCommentComponent(data);
