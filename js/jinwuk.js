@@ -1,9 +1,10 @@
 /**************
 	메인 로직
 **************/
+
 console.log("jinwuk.js loaded");
 
-const db = createDBInstance();
+const db = createDBInstance(); //미구현
 const commentData = loadCommentData(db);
 
 //db에서 가져온 댓글이 있으면
