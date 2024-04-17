@@ -88,7 +88,27 @@
       width: 100%;
       height: 150px;
       background-color: #f8f8f8;
+      display: flex;
+    }
+    #wrap .introduce .contents .information .my_intro{
+      width: 80%;
       padding: 15px;
+    }
+    #wrap .introduce .contents .information .my_link{
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    #wrap .introduce .contents .information .my_link ul{
+      display: flex;
+      padding: 10px;
+      margin-top: 80px;
+    }
+    #wrap .introduce .contents .information .my_link li{
+      display: flex;
+      padding: 10px;
     }
     #wrap .introduce .contents .information h1{
       font-size: 30px;
@@ -188,17 +208,26 @@
         <div class="photo"></div>
         <div class="contents">
           <div class="information">
-            <h1>유인수</h1>
+            <div class="my_intro">
+              <h1>유인수</h1>
             <p>
                자격증 공부중 코딩에 흥미를 느껴 내일배움캠프에 참가하게 되었고 , <br>
                여기서의 배움을 바탕으로 개발자로서 새로운 전환점을 맞이하고 싶습니다. <br>
-               다양한 프로젝트와 도전을 통해 같은 꿈을 가진 조원분들과 함께 나아가겠습니다.</p>
+               다양한 프로젝트와 도전을 통해 같은 꿈을 가진 조원분들과 함께 나아가겠습니다.
+            </p>
+            </div>
+            <div class="my_link">
+              <ul>
+                <li><a href="https://velog.io/@dtdt203"><img src="../image/vellog-img-50x50.jpg" alt="블로그_바로가기"></a></li>
+                <li><a href="https://github.com/YISYISYISYIS"><img src="../image/github-img-50x50.jpg" alt="깃허브_바로가기"></a></li>
+              </ul>
+            </div>
           </div>
           <div class="notepad_wrap">
             <div class="notepad_writing">
               <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingInput" placeholder="메모장">
-                <label for="floatingInput">메모장</label>
+                <label for="floatingInput">메모3개까지 가능. 그이상은 전체삭제하고 다시 써주세요.</label>
               </div>
               <!-- //form-floating mb-3 -->
               <div class="notepad_btn">
