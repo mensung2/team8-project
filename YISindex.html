@@ -19,25 +19,25 @@
 
   <title>자기소개 페이지</title>
   <style>
-    * {
+    *{
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
+    body{
       font-size: 16px;
       font-family: 'Noto Sans KR', sans-serif;
       color: #000;
       background-color: #fff;
     }
-    li {
+    li{
       list-style: none;
     }
-    a {
+    a{
       text-decoration: none;
       color: inherit;
     }
-    img {
+    img{
       vertical-align: top;
     }
     /* //common */
@@ -45,38 +45,38 @@
 
 
 
-    #wrap {
+    #wrap{
       width: 100%;
       margin: 0 auto;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
     }
-    #wrap .main {
+    #wrap .main{
       width: 1350px;
       height: 600px;
       margin-top: 100px;
     }
-    #wrap .introduce {
+    #wrap .introduce{
       width: 100%;
       height: 600px;
-      background-color: #a3a3a3;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      /* 2열 구조 */
       gap: 50px;
     }
-    #wrap .introduce .photo {
+    #wrap .introduce .photo{
       width: 500px;
       height: 600px;
-      background-color: #b3b3b3;
       grid-column: 1/2;
       grid-row: 1/3;
+      background-image: url(../image/yis_photo.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
-    #wrap .introduce .contents {
+    #wrap .introduce .contents{
       width: 800px;
       height: 500px;
-      background-color: #c3c3c3;
       grid-column: 2/3;
       grid-row: 1/2;
       display: flex;
@@ -84,25 +84,30 @@
       flex-direction: column;
       justify-content: space-between;
     }
-    #wrap .introduce .contents .information {
+    #wrap .introduce .contents .information{
       width: 100%;
       height: 150px;
-      background-color: #b3b3b3;
+      background-color: #f8f8f8;
+      padding: 15px;
     }
-    #wrap .introduce .contents .notepad_wrap {
+    #wrap .introduce .contents .information h1{
+      font-size: 30px;
+    }
+    #wrap .introduce .contents .information p{
+      padding-left: 10px;
+    }
+    #wrap .introduce .contents .notepad_wrap{
       width: 100%;
       height: 300px;
-      background-color: #b5b5b5;
     }
-    #wrap .introduce .contents .notepad_wrap .notepad_writing {
+    #wrap .introduce .contents .notepad_wrap .notepad_writing{
       width: 100%;
       height: 80px;
-      background-color: #523535;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .form-floating.mb-3 {
+    .form-floating.mb-3{
       margin-top: 18px;
     }
     .notepad_btn{
@@ -112,67 +117,64 @@
     #postingbtn{ 
       margin-right: 10px;
     }
-    #floatingInput {
+    #floatingInput{
       width: 600px;
-      /* height: 60px; */
     }
-    .btn.btn-success {
-      /* width: 100px; */
+    .btn.btn-success{
       height: 60px;
     }
-    #wrap .introduce .contents .notepad_wrap .notepad_show {
-
+    .notepad_show .col{
+      height: 220px;
+      padding: 10px;
     }
-    /* .notepad_show .col {
-      height: 100px;
-    } */
-    /* .row.row-cols-1.row-cols-md-3.g-4{
-      width: 1050px;
-    } */
-    #wrap .introduce .hashtag {
+    #wrap .introduce .hashtag{
       width: 800px;
       height: 50px;
       grid-column: 2/3;
       grid-row: 2/3;
-      background-color: #d3d3d3;
+      background-color: #f8f8f8;
+      display: flex;
+    }
+    #wrap .introduce .hashtag p{
+      padding: 13px;
+      font-weight: 500;
     }
     /* //main */
 
 
 
 
-    #wrap .footer {
+    #wrap .footer{
       margin-top: 50px;
       width: 1350px;
       height: 100px;
-      background-color: #e3e3e3;
       display: flex;
       justify-content: center;
     }
-    #wrap .footer .comment {
+    #wrap .footer .comment{
       width: 1000px;
       height: 100%;
-      background-color: #a5a5a5;
+      background-color: #f8f8f8;
     }
-    .container.py-5 {
+    .container.py-5{
       padding-top: 0rem !important;
     }
-    #commentForm {
+    #commentForm{
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
     }
-    #commentForm button {
+    #commentForm button{
       height: 40px;
       margin-top: 30px;
     }
-    .mt-3>div {
+    .mt-3>div{
       padding-top: 10px;
     }
-    #wrap .footer .comment #commentInput {
+    #wrap .footer .comment #commentInput{
       width: 600px;
     }
-    #wrap .footer .comment #passwordInput {
+    #wrap .footer .comment #passwordInput{
       width: 180px;
     }
     /* //footer */
@@ -185,7 +187,13 @@
       <div class="introduce">
         <div class="photo"></div>
         <div class="contents">
-          <div class="information"></div>
+          <div class="information">
+            <h1>유인수</h1>
+            <p>
+               자격증 공부중 코딩에 흥미를 느껴 내일배움캠프에 참가하게 되었고 , <br>
+               여기서의 배움을 바탕으로 개발자로서 새로운 전환점을 맞이하고 싶습니다. <br>
+               다양한 프로젝트와 도전을 통해 같은 꿈을 가진 조원분들과 함께 나아가겠습니다.</p>
+          </div>
           <div class="notepad_wrap">
             <div class="notepad_writing">
               <div class="form-floating mb-3">
@@ -201,21 +209,24 @@
             </div>
             <!-- //notepad_writing -->
             <div class="notepad_show">
-              <div id="card" class="row row-cols-1 row-cols-md-3 g-4">
-                <!-- <div class="col">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <p class="card-text">메모할내용</p>
-                    </div>
-                  </div>
-                </div> -->
+              <div id="card" class="row row-cols-1 row-cols-md-3 g-1">
+               
               </div>
             </div>
             <!-- //notepad_show -->
           </div>
           <!-- //notepad -->
         </div>
-        <div class="hashtag"></div>
+        <div class="hashtag">
+          <a href="#"><p>#개발자 꿈나무</p></a>
+          <a href="#"><p>#성실함</p></a>
+          <a href="#"><p>#약속</p></a>
+          <a href="#"><p>#꾸준함</p></a>
+          <a href="#"><p>#HTML</p></a>
+          <a href="#"><p>#CSS</p></a>
+          <a href="#"><p>#JavaScript</p></a>
+          <a href="#"><p>#React</p></a>
+        </div>
       </div>
     </div>
     <!-- //main -->
@@ -242,11 +253,11 @@
     <!-- footer -->
   </div>
   <!-- //wrap -->
+
+
   <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
   <!-- 파이어베이스 CDN -->
-
-  <!-- 직접짠 -->
   <script type="module">
     // Firebase SDK 라이브러리 가져오기
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -272,6 +283,13 @@
     const db = getFirestore(app);
 
         $("#postingbtn").click(async function () {
+          const docsCount = docs.size; // 현재 저장된 메모의 개수를 가져옴
+
+          if(docsCount >= 3) {
+            alert("더 이상 메모를 추가할 수 없습니다.");
+            return; // 함수 실행을 여기서 종료.
+          }
+
           let note = $("#floatingInput").val();
 
           let doc = {
@@ -284,10 +302,9 @@
 
         let docs = await getDocs(collection(db, "notepad"));
             docs.forEach((doc) => {
-                let row = doc.data();
+            let row = doc.data();
 
             let note = row["note"]    
-
             let temp_html =`<div class="col">
                   <div class="card h-100">
                     <div class="card-body">
