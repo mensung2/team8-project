@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>8조</title>
+  <title>dongkyu</title>
  
   <link rel="stylesheet" href="./css/dongkyu.css">
 
@@ -12,48 +12,69 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="main">
-      <div class="photo">
-        <img src="" width="500px" height="700px">
-      </div>
-
-      <div class="test">
-        <div class="introduce">
-          <h1>
-            양동규
-          </h1>
-
-          <h3>
-            안녕하세요
-          </h3>
-        </div>
-
-        <div class="hashtag">
-          <h1>#내일배움캠프 #프론트엔드</h1>
-        </div>
-      </div>  
-    </div>  
-    
-    <div class="footer">
-      <div class = "comment">
-        <div class="card-footer">
-          <form onsubmit="addComment(event)">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="댓글을 입력하세요"  required > 
-              <button type="submit" class="btn btn-primary">작성</button>
-            </div>
-          </form>
-          <div class="comments mt-3">
+  <div class="all">
+    <div class="wrap">
+      <div class="main">
+        <div class="photo" >
+          <div class="myPhoto"> <img src="" width="500px" height="700px">
+          </div>
+          <div class="ins">
+            <a 
+            href="https://www.naver.com/"
+            target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png"
+            width="50px" height="50px">
+            </a>
+          </div>
+          <div class="vel">
+            <a 
+            href="https://velog.io/@dongkyuuu/"
+            target="_blank">
+            <img src="https://search.pstatic.net/sunny?src=https%3A%2F%2Fstatic.velog.io%2Ffavicon.ico&type=f30_30_png_expire24"
+            width="50px" height="50px">
+            </a>
           </div>
         </div>
-      </div>
-    </div>  
-    
-    
+
+        <div class="my">
+          <div class="introduce">
+            <h1>
+              &nbsp;&nbsp;양동규
+            </h1>
+            <h3>&nbsp;&nbsp;&nbsp;&nbsp;안녕하세요</h3>
+            <p></p>
+            <h3>&nbsp;&nbsp;</h3>
+            <p></p>
+            <h3></h3>
+            <p></p>
+            <h3>&nbsp;&nbsp;</h3>
+          </div>
+
+          <div class="hashtag">
+            <h2>&nbsp;&nbsp;#프론트엔드 #개발자</h2>
+          </div>
+        </div>  
+      </div>  
+      
+      <div class="footer">
+        <div class = "comment">
+          <div class="card-footer">
+            <form onsubmit="addComment(event)">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="댓글을 입력하세요"  required > 
+                <button type="submit" class="btn btn-primary">작성</button>
+              </div>
+            </form>
+            <div class="comments mt-3">
+            </div>
+          </div>
+        </div>
+      </div>  
+      
+      
+    </div>
   </div>
 </div>
-
 <script>
  function addComment(event) {
   event.preventDefault();
