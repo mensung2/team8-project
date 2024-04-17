@@ -32,7 +32,7 @@ document.addEventListener('keyup', createLayoutOutlineHandler());
 ******************/
 function createLayoutOutlineHandler() {
 	let turnedOn = false;
-	
+
 	const cssRule = "* { outline: rgb(160, 160, 255) solid 1px;}";
 	const styleElemId = "devOutlineStyle";
 
@@ -87,64 +87,68 @@ function handleClickDeleteButton(event) {
 }
 
 function handleClickWriteButton(event) {
-	//입력필드 요소 불러오기
 	const commentInputField = document.getElementById("comment-input");
 
-	//To-do: 입력필드 유효성 검사하기
+	const inputFieldText = commentInputField.value;
 
-	//입력필드 데이터 불러오기
-	const commentText = commentInputField.value;
+	const {valid, code} = validateText(inputFieldText);
+	if(!valid) {
+		//유효하지 않은 이유 출력
+		alert(getMessageOfCode(code));
 
-	//입력필드 값 초기화하기
+		commentInputField.focus();
+		return;
+	}
+
 	commentInputField.value = "";
 
-	//댓글 데이터 구성
-	const commentData = { text: commentText };
-
-	//댓글 컴포넌트 만들기
+	const commentData = { text: inputFieldText };
 	const commentComponent = createCommentComponent(commentData);
-
-	//댓글창에 댓글 컴포넌트 붙이기
 	attachCommentToContainer(commentComponent);
 
-	//댓글이 0개였다가 1개가 된 경우 댓글표시 UI 키기
+	db.writeComment(commentData);
+
 	if (getCommentNumber() === 1) {
 		setCommentUIVisibility(true);
 	}
 
-	//DB에 저장
-	db.writeComment(commentData);
-
 	alert("작성이 완료되었습니다.");
+
+	commentInputField.focus();
 }
 
 function handleClickModifyButton(event) {
 	//To-do: 이미 수정 버튼을 눌러서 수정가능한 상태인 경우 처리
 
-	//수정버튼과 연결된 댓글내용 HTML요소 불러오기
+	//수정버튼과 연결된 댓글내용 HTML요소
 	const span = event.target.parentElement.querySelector('span');
 
-	//댓글내용을 수정가능 상태로 변경 및 포커스 적용,
 	span.contentEditable = true;
 	span.focus();
 
 	//To-do: Range 사용하여 커서를 맨 끝으로 커서 이동
 
-	//엔터입력 이벤트를 감지하기 위한 헨들러등록
 	span.addEventListener('keyup', handleKeyup);
 	span.addEventListener('keydown', handleKeydown);
 
 	//To-do: 수정완료 버튼 동적으로 추가
-
+	
 	function handleKeyup(event) {
 		if (event.key === 'Enter' && !event.shift) {
-			//새로운 댓글내용을 DB에 쓰기
+			const commentText = span.innerText;
+
+			const { valid, code } = validateText(commentText);
+			if (!valid) {
+				//유효하지 않은 이유 출력
+				alert(getMessageOfCode(code));
+				commentInputField.focus();
+				return;
+			}
+
 			db.writeComment(span.innerText);
 
-			//댓글내용을 수정불가 상태로 변경
 			span.contentEditable = false;
 
-			//핸들러 해제
 			span.removeEventListener('keydown', handleKeydown);
 			span.removeEventListener('keyup', handleKeyup);
 
@@ -153,6 +157,7 @@ function handleClickModifyButton(event) {
 	}
 
 	function handleKeydown(event) {
+		//줄바꿈 문자 입력 방지
 		if (event.key === "Enter") {
 			event.preventDefault();
 		}
@@ -228,7 +233,7 @@ function createCommentComponent(comment) {
 		if (info.eventType) {
 			subc.addEventListener(info.eventType, info.eventHandler)
 		}
-		if(info.className) {
+		if (info.className) {
 			subc.setAttribute("class", info.className)
 		}
 		//메인컴포넌트에 서브컴포넌트를 자식으로 붙인다.
@@ -275,8 +280,6 @@ function attachCommentToContainer(commentComponent) {
 }
 
 function getCommentNumber() {
-	console.dir(document.querySelectorAll('.a-comment'));
-
 	return document.querySelectorAll('.a-comment').length
 }
 
@@ -292,4 +295,42 @@ function setVisibility(targetElem, visible) {
 		targetElem.setAttribute('hidden', "");
 		return;
 	}
+}
+
+function validateText(text) {
+	const analyzeResult = {};
+	analyzeResult.code = analyzeText(text);
+
+	switch (analyzeResult.code) {
+		case 'empty':
+		case 'bad-word':
+			analyzeResult.valid = false;
+			break;
+		case 'ok':
+			analyzeResult.valid = true;
+			break;
+		default:
+			console.error('validateText->switch statement: invalid default detected');
+			analyzeResult.valid = true;
+			break;
+	}
+	return analyzeResult;
+}
+
+function analyzeText(text){
+	if(text.length === 0) {
+		return "empty";
+	} else if(text.includes('나쁜말')) {
+		return "bad-word";
+	} else {
+		return "ok";
+	}
+}
+
+function getMessageOfCode(code) {
+	const codeToMessageMap = {
+		'empty': '입력된 값이 없습니다. 값을 입력해주세요.',
+		'bad-word': '나쁜말을 사용하지 맙시다 ^^.',
+	};
+	return codeToMessageMap[code];
 }
