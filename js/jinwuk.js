@@ -16,13 +16,23 @@ if (commentData.length) {
 /*********************
   이벤트 핸들러 등록
 *********************/
-(document.getElementById('write-button')
-	.addEventListener('click', handleClickWriteButton));
+document.getElementById('write-button')
+	.addEventListener('click', handleClickWriteButton);
 
-(document.getElementById('back-button')
-	.addEventListener('click', handleClickBackeButton));
+document.getElementById('back-button')
+	.addEventListener('click', handleClickBackButton);
 
-
+//ctrl+shift+q를 누르면 레이아웃 아웃라인 표시
+//To-do 한 번 더 누르면 레이아웃 아웃라인 숨기기
+document.addEventListener('keyup', (event) => {
+	console.dir(event);
+	if (event.shiftKey && event.ctrlKey
+		&& event.key.toLowerCase() === 'q') {
+		const ss = document.styleSheets[0];
+		ss.insertRule(`* { outline: rgb(160, 160, 255) solid 1px;}`
+			, ss.cssRules.length);
+	}
+});
 
 /***************
  핸들러 관련 함수
@@ -52,7 +62,7 @@ function handleClickWriteButton(event) {
 	//입력필드 요소 불러오기
 	const commentInputField = document.getElementById("comment-input");
 
-	//To-do: 입력필드 길이 검사하기
+	//To-do: 입력필드 유효성 검사하기
 
 	//입력필드 데이터 불러오기
 	const commentText = commentInputField.value;
@@ -76,6 +86,8 @@ function handleClickWriteButton(event) {
 
 	//DB에 저장
 	db.writeComment(commentData);
+
+	alert("작성이 완료되었습니다.");
 }
 
 function handleClickModifyButton(event) {
@@ -119,7 +131,7 @@ function handleClickModifyButton(event) {
 	}
 }
 
-function handleClickBackeButton(event) {
+function handleClickBackButton(event) {
 	document.location.href = "./index.html";
 }
 
@@ -173,7 +185,7 @@ function createCommentComponent(comment) {
 	}];
 
 	//메인 컴포넌트 생성
-	//메인 컴포넌트가 서브컴포넌트들을 하나로 묶는다.
+	//역할: 아래 forEach에서 서브컴포넌트들을 하나로 묶을 것이다.
 	const mainComponent = document.createElement('div');
 	mainComponent.setAttribute("className", "a-comment");
 	mainComponent.commentId = commentId;
@@ -241,9 +253,4 @@ function toggleCommentUI(forceHide) {
 		//켜기
 		return;
 	}
-}
-
-function getConfigurationData() {
-	return {
-	};
 }

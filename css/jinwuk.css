@@ -1,6 +1,10 @@
 /*****************
     크기 설정 
 *****************/
+html {
+	height: 100%;
+}
+
 body {
 	width: 1920px;
 	height: 1080px;
@@ -46,20 +50,26 @@ main {
 	height: 150px;
 }
 
-/******************
-    display 설정 
-*****************/
+/*******************
+    레이아웃 설정 
+*******************/
+html {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 body {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 
 main {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 
-	padding: 0px 50px;
+	padding: 30px 50px;
 }
 
 #top-section {
@@ -93,6 +103,10 @@ main {
 	align-items: center;
 }
 
+#introduce-article {
+	padding: 10px 10px;
+}
+
 #tags-div {
 	display: flex;
 	align-items: center;
@@ -122,7 +136,60 @@ main {
 	width: 80%
 }
 
-/* 테스트용 */
-* :not(html) {
-	border: rgb(160, 160, 255) solid 1px;
+/* To-do: 그리드 레이아웃 
+  -아이템 가운데 정렬 
+  -구분선 추가
+*/
+
+/*****************
+   꾸미기 설정 
+*****************/
+
+:root {
+	--documentOuterBgColor: #7a2048;
+	--documentInnerBgCOlor: #1e2761;
+	--topSectionBgColor: #99AEAE;
+	--bottomSectionBgColor: #99AEAE;
+	--centerSectionBgColor: #408ec6;
+	--hashtagDivBgColor: azure;
+	--hashTagBgColor: rgba(245, 245, 238, 0.99);
+	--introduceDivBgColor: azure;
+	--commentDivBgColor: azure;
+	--globalOpacity: 75%;
+}
+
+body {
+	background-color: var(--documentOuterBgColor);
+}
+
+main {
+	background-color: var(--documentInnerBgCOlor);
+}
+
+#top-section {
+	background-color: var(--topSectionBgColor);
+}
+
+#center-section {
+	background-color: var(--centerSectionBgColor);
+}
+
+#bottom-section {
+	background-color: var(--bottomSectionBgColor);
+}
+
+#introduce-article {
+	background-color: var(--introduceDivBgColor);
+}
+
+#tags-div {
+	background-color: var(--hashtagDivBgColor);
+}
+
+#tags-div>span {
+	background-color: var(--hashTagBgColor);
+}
+
+#comment-div {
+	background-color: var(--commentDivBgColor);
 }
