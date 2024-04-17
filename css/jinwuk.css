@@ -144,7 +144,6 @@ main {
 /*****************
    꾸미기 설정 
 *****************/
-
 :root {
 	--documentOuterBgColor: #7a2048;
 	--documentInnerBgCOlor: #1e2761;
@@ -192,4 +191,10 @@ main {
 
 #comment-div {
 	background-color: var(--commentDivBgColor);
+}
+
+.a-comment-text {
+	padding-left: 5px;
+	border-left: 1px solid var(--documentOuterBgColor);
+	border-bottom: 1px solid var(--documentOuterBgColor);
 }

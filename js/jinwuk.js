@@ -23,16 +23,16 @@ document.getElementById('write-button')
 document.getElementById('back-button')
 	.addEventListener('click', handleClickBackButton);
 
-document.addEventListener('keyup', handleLayoutOutlineHandler());
+document.addEventListener('keyup', createLayoutOutlineHandler());
 
 
 
 /*****************
 	핸들러 함수들
 ******************/
-
-function handleLayoutOutlineHandler() {
+function createLayoutOutlineHandler() {
 	let turnedOn = false;
+	
 	const cssRule = "* { outline: rgb(160, 160, 255) solid 1px;}";
 	const styleElemId = "devOutlineStyle";
 
@@ -64,7 +64,6 @@ function handleLayoutOutlineHandler() {
 
 	return _handleLayoutOutlineHandler;
 }
-
 
 function handleClickDeleteButton(event) {
 	//클릭된 삭제버튼과 연결된 댓글 컴포넌트 불러오기
@@ -189,9 +188,9 @@ function dbModifyCommentAtDB(comment) {
 
 }
 
-/*******************
+/********************
  컴포넌트 관련 함수들
-********************/
+*********************/
 function createCommentComponent(comment) {
 	//댓글 식별 아이디 생성
 	const commentId = Symbol('commentId');
@@ -201,6 +200,7 @@ function createCommentComponent(comment) {
 	const subComponentMap = [{
 		tagName: 'span',
 		innerText: comment.text,
+		className: "a-comment-text",
 	}, {
 		tagName: 'button',
 		innerText: '삭제',
@@ -225,6 +225,9 @@ function createCommentComponent(comment) {
 		subc.innerText = info.innerText;
 		if (info.eventType) {
 			subc.addEventListener(info.eventType, info.eventHandler)
+		}
+		if(info.className) {
+			subc.setAttribute("class", info.className)
 		}
 		//메인컴포넌트에 서브컴포넌트를 자식으로 붙인다.
 		mainComponent.appendChild(subc);
