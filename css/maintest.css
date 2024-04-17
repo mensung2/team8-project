@@ -1,0 +1,102 @@
+.all{
+    background-color: white;
+  }
+  
+  
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 1350px;
+    height: 800px;
+    margin: 0 auto;
+    margin-top: 50px;
+    
+    background-color: rgb(247, 43, 43);
+
+   
+  }
+
+  .header{
+    width: 1350px;
+    height: 200px;
+    background-color: pink;
+
+  }
+
+  .main{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    flex-direction: row;
+  }
+
+  
+
+  .te1{
+    width: 200px;
+    height: 500px;
+    background-color: pink;
+    margin-right: 87.5px; 
+
+    cursor:pointer;
+    
+  }
+  .te2{
+    width: 200px;
+    height: 500px;
+    background-color: pink;
+    margin-right: 87.5px; 
+
+  }
+  .te3{
+    width: 200px;
+    height: 500px;
+    background-color: pink;
+    margin-right: 87.5px; 
+  }
+  .te4{
+    width: 200px;
+    height: 500px;
+    background-color: pink;
+    margin-right: 87.5px; 
+  }
+  .te5{
+    width: 200px;
+    height: 500px;
+    background-color: pink;
+    
+  }
+
+  .img{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(252, 140, 159);
+    margin: 10px auto;
+  }
+
+  .line{
+    margin-top: 40px;
+  }
+
+  .name{
+    width: 156px;
+    height: 88px;
+    background-color: beige;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+
+  .name h1 {
+    text-align: center;
+  }
+
+  .name h3 {
+    text-align: center;
+    margin-top: -14px;
+  }
+
+  .te1:hover {
+    transform: scale(1.1);
+  }
