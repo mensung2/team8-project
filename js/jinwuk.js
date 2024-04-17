@@ -23,6 +23,7 @@ if (commentData.length) {
 	.addEventListener('click', handleClickBackeButton));
 
 
+
 /***************
  핸들러 관련 함수
 ****************/
@@ -31,16 +32,16 @@ function handleClickDeleteButton(event) {
 	const commentComp = event.target.parentElement;
 
 	//댓글 정보 추출
-	const commentData = commentComp.querySelector("span").innerText;	
+	const commentData = commentComp.querySelector("span").innerText;
 
 	//댓글 정보 DB에서 삭제
 	db.deleteComment(commentData);
-	
+
 	//댓글 컴포넌트 문서에서 삭제
 	commentComp.remove();
 
 	//To-do: 삭제 후 댓글이 0개가 된 경우 댓글 표시 UI 끄기
-	if(false) {
+	if (false) {
 		toggleCommentUI(true)
 	}
 
@@ -78,14 +79,47 @@ function handleClickWriteButton(event) {
 }
 
 function handleClickModifyButton(event) {
-	console.log('modify');
+	//To-do: 이미 수정 버튼을 눌러서 수정가능한 상태인 경우 처리
 
-	//문서에 반영
+	//수정버튼과 연결된 댓글내용 HTML요소 불러오기
+	const span = event.target.parentElement.querySelector('span');
 
-	//DB에 반영
+	//댓글내용을 수정가능 상태로 변경 및 포커스 적용,
+	span.contentEditable = true;
+	span.focus();
+
+	//To-do: Range 사용하여 커서를 맨 끝으로 커서 이동
+
+	//엔터입력 이벤트를 감지하기 위한 헨들러등록
+	span.addEventListener('keyup', handleKeyup);
+	span.addEventListener('keydown', handleKeydown);
+
+	//To-do: 수정완료 버튼 동적으로 추가
+
+	function handleKeyup(event) {
+		if (event.key === 'Enter' && !event.shift) {
+			//새로운 댓글내용을 DB에 쓰기
+			db.writeComment(span.innerText);
+
+			//댓글내용을 수정불가 상태로 변경
+			span.contentEditable = false;
+
+			//핸들러 해제
+			span.removeEventListener('keydown', handleKeydown);
+			span.removeEventListener('keyup', handleKeyup);
+
+			alert("수정이 완료되었습니다.");
+		}
+	}
+
+	function handleKeydown(event) {
+		if (event.key === "Enter") {
+			event.preventDefault();
+		}
+	}
 }
 
-function handleClickBackeButton(event){
+function handleClickBackeButton(event) {
 	document.location.href = "./index.html";
 }
 
