@@ -23,7 +23,7 @@ document.getElementById('write-button')
 document.getElementById('back-button')
 	.addEventListener('click', handleClickBackButton);
 
-document.addEventListener('keyup', handleLayoutOutlineHandler);
+document.addEventListener('keyup', handleLayoutOutlineHandler());
 
 
 
@@ -31,7 +31,7 @@ document.addEventListener('keyup', handleLayoutOutlineHandler);
 	핸들러 함수들
 ******************/
 
-function handleLayoutOutlineHandler(event) {
+function handleLayoutOutlineHandler() {
 	let turnedOn = false;
 	const cssRule = "* { outline: rgb(160, 160, 255) solid 1px;}";
 	const styleElemId = "devOutlineStyle";
@@ -62,7 +62,7 @@ function handleLayoutOutlineHandler(event) {
 		}
 	}
 
-	return _handleLayoutOutlineHandler(event);
+	return _handleLayoutOutlineHandler;
 }
 
 
