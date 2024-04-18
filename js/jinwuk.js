@@ -76,7 +76,7 @@ function handleClickWriteButton() {
 	const { valid, code } = validateText(inputFieldText);
 	if (!valid) {
 		//유효하지 않은 이유 출력
-		alert(getMessageOfCode(code));
+		alert(getCodeMessage(code));
 
 		commentInputField.focus();
 		return;
@@ -108,8 +108,10 @@ function handleKeyupInputField(event) {
 }
 
 function handleClickModifyButton(event) {
-	//To-do: 이미 수정 버튼을 눌러서 수정가능한 경우의 처리
-
+	//To-do: 이미 같은 댓글의 수정 버튼을 또 누른 경우
+	//To-do: 이미 한 댓글의 수정 버튼을 눌렀는데 
+	//또 다른 댓글의 수정 버튼을 누른 경우 
+	
 	//수정버튼과 연결된 댓글내용 HTML요소
 	const span = event.target.parentElement.querySelector('span');
 
@@ -130,8 +132,7 @@ function handleClickModifyButton(event) {
 			const { valid, code } = validateText(commentText);
 			if (!valid) {
 				//유효하지 않은 이유 출력
-				alert(getMessageOfCode(code));
-				commentInputField.focus();
+				alert(getCodeMessage(code));
 				return;
 			}
 
@@ -331,7 +332,7 @@ function analyzeText(text){
 	}
 }
 
-function getMessageOfCode(code) {
+function getCodeMessage(code) {
 	const codeToMessageMap = {
 		'empty': '입력된 값이 없습니다. 값을 입력해주세요.',
 		'bad-word': '나쁜말을 사용하지 맙시다 ^^.',
