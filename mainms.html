@@ -4,16 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .amongus {
+            width: 200px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: gray;
+            text-align: center;
+        }
+
+        .amongus:hover {
+            filter: brightness(0.5);
+        }
+
+        .profileimg {
+            margin: 15px auto 40px auto;
+        }
+
+    </style>
 </head>
 <body>
     <div class="header">
         <img src="https://cdn.discordapp.com/attachments/1229308676834070531/1230121311012126750/image.png?ex=66322abf&is=661fb5bf&hm=91a329feec4186bb7e5cdba7ac7ca837fa2efecbda61e14f3354104d3621d289&" alt="8llowmin" width=1350px />
     </div>
     <div class="main">
-        <div class="amongus">
-            <div class="profileimg"><img src="" width=210px height=210px/></div>
-            <hr class="line" style="border: solid 1px; width: 215px;">
-            <div class="contents"></div>
+        <div class="amongus" onclick="location.href='https://www.naver.com/'">
+            <div class="profileimg"><img src="" width=180px height=180px/></div>
+            <hr class="line" style="border: solid 1px; width: 180px;">
+            <div class="contents">
+                <h1>이름</h1>
+                <h3>내용</h3>
+            </div>
         </div>
     </div>
 </body>
