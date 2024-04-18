@@ -322,8 +322,9 @@ function dbModifyCommentAtDB(comment, commentId) {
 }
 
 function createDBInstance() {
+	const db = {};
 	try {
-		const db = connectDB();
+		db = connectDB();
 	} catch(e) {
 		console.error('db연결 실패');
 		return {};
