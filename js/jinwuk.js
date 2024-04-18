@@ -239,21 +239,6 @@ function processCommentData(commentData) {
 	});
 }
 
-//db에서 불러온 댓글 데이터를 배열로 반환한다
-function loadCommentData(db) {
-	return loadDummyData();
-
-	function loadDummyData() {
-		return [
-			{ text: '안녕하세요' },
-			{ text: 'hello hello' },
-			{ text: "let's goooo" },
-			{ text: '리액트' },
-			{ text: '자바스크립트' },
-		];
-	}
-}
-
 function attachCommentToContainer(commentComponent) {
 	document.getElementById('comment-content-div')
 		.append(commentComponent);
@@ -324,20 +309,19 @@ function getCodeMessage(code) {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-function dbWriteCommentAtDB(comment) {
-    
+function dbWriteCommentAtDB(comment, commentId) {
+    //setDoc();
 }
 
-function dbDeleteCommentAtDB(comment) {
-    
+function dbDeleteCommentAtDB(comment, commentId) {
+    //deleteDoc();
 }
 
-function dbModifyCommentAtDB(comment) {
-    
+function dbModifyCommentAtDB(comment, commentId) {
+    //setDoc();
 }
 
 function createDBInstance() {
-	const db = connectDB();
 	try {
 		const db = connectDB();
 	} catch(e) {
@@ -367,5 +351,23 @@ function connectDB(){
 
 	const app = initializeApp(firebaseConfig);
 	const fireStore = getFirestore(app);
+
 	return fireStore;
+}
+
+//db에서 불러온 댓글 데이터를 배열로 반환한다
+function loadCommentData(db) {
+	//getDocs();
+	
+	return loadDummyData();
+
+	function loadDummyData() {
+		return [
+			{ text: '안녕하세요' },
+			{ text: 'hello hello' },
+			{ text: "let's goooo" },
+			{ text: '리액트' },
+			{ text: '자바스크립트' },
+		];
+	}
 }
