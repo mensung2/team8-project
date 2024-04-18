@@ -1,6 +1,7 @@
 .all{
-    background-color: white;
-  }
+    background-color: white; 
+    
+   }
   
   
   .wrap {
@@ -17,7 +18,7 @@
 
    
   }
-
+  
   .header{
     width: 1350px;
     height: 200px;

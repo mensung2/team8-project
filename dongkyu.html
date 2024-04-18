@@ -19,7 +19,7 @@
       </div>
       <div class="main">
         <div class="photo" >
-          <div class="myPhoto"> <img src="" width="500px" height="700px">
+          <div class="myPhoto"> <img src="./image/KakaoTalk_20240416_165618334.jpg" width="500px" height="700px">
           </div>
           <div class="git">
             <a 
@@ -110,7 +110,6 @@
 
   commentInput.value = "";
 
-  // 수정 버튼에 이벤트 리스너 추가
   const editBtn = commentDiv.querySelector(".edit-btn");
   editBtn.addEventListener("click", function() {
     var newText = prompt("댓글을 수정하세요:", commentText);
@@ -120,7 +119,6 @@
     }
   });
   
-  // 삭제 버튼에 이벤트 리스너 추가
   const deleteBtn = commentDiv.querySelector(".delete-btn");
   deleteBtn.addEventListener("click", function() {
     const confirmDelete = confirm("정말로 삭제하시겠습니까?");
