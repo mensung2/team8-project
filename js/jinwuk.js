@@ -345,7 +345,7 @@ function createDBInstance() {
 	}
 	
 	console.log('db 연결 성공');
-	
+
 	db.writeComment = dbWriteCommentAtDB;
 	db.deleteComment = dbDeleteCommentAtDB;
 	db.modifyComment = dbModifyCommentAtDB;
@@ -368,8 +368,3 @@ function connectDB(){
 
 	return {};
 }
-
-
-
-
-
