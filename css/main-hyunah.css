@@ -1,8 +1,13 @@
+.page {
+    background-color: black;
+}
+
 .wrap {
+    
         width: 1350px;
         height: 800px;
         margin: 0 auto;
-        margin-top: 50px;
+        margin-top: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
