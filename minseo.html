@@ -7,11 +7,6 @@
     <title>소개 페이지</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
-        
-        .main {
-            width: 1400px;
-            margin: 100px auto 0px auto;
-        }
 
         .top {
             display: flex;
@@ -33,7 +28,7 @@
             background-image: url('https://cdn.discordapp.com/attachments/868151962623967276/1230321979370901698/image.png?ex=6632e5a2&is=662070a2&hm=7b3152cc510c8622ce3f1b44424a0b4331521987db3d77afdbb79e18ec0f44ad&');
             background-position: center;
             background-size: cover;
-            box-shadow: 8px 8px #B54756;
+            box-shadow: 8px 8px black, 10px 10px 0 1px white;
         }
 
         .right {
@@ -50,14 +45,14 @@
         .tag {
             width: 800px;
             height: 50px;
-            background-color: bisque;
+            color: rgb(36, 147, 238);
+            font-size: large;
         }
 
         .comment {
             display: flex;
             justify-content: center;
-            background-color: bisque;
-            margin: 25px 10px 0;
+            margin: 40px 10px 0;
         }
 
         .commentbox {
@@ -73,16 +68,62 @@
         }
 
         h1 {
-            text-indent : 30px;
-            
+            text-indent: 30px;
+            font-family: "Black Han Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 250%;
         }
+
         p {
-            text-indent : 30px;
+            text-indent: 30px;
             line-height: 50%;
             color: aliceblue;
         }
-
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+        import { addDoc, collection, getFirestore } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js'
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCiNrfzhv8aPhnpZJCGvDsJJJ0soDUlOOM",
+            authDomain: "sparta-588ba.firebaseapp.com",
+            projectId: "sparta-588ba",
+            storageBucket: "sparta-588ba.appspot.com",
+            messagingSenderId: "483293445849",
+            appId: "1:483293445849:web:4ef17658be6aae850b08c8",
+            measurementId: "G-2WV9VDQCH8"
+        };
+
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        $("#postingbtn").click(async function () {
+            let doc = {
+                hello: 5
+            };
+            await addDoc(collection(db, "comments"), doc);
+        })
+
+        // function addComment(event) {
+        //     let cbox = $(`#cbox`).val();
+        //     let temp_html - `<div class="comments mt">
+        //         </div>`;
+        //         $('#comments').append(temp_html);
+        // }
+
+    </script>
 </head>
 
 <body>
@@ -98,16 +139,21 @@
                     <p>아마추어 창작 활동 모임의 차별화를 위해 코딩의 필요성을 느꼈습니다.</p>
                     <p>단순한 취미의 영역만이 아닌, 많은 직종에 도전할 밑거름을 만들고 싶습니다.</p>
                     <p>코딩 캠프를 시작하며 처음 접한 영역이지만, 꾸준한 복습으로 공백을 채우겠습니다.</p>
-                    <img src="https://gist.githubusercontent.com/brudnak/aba00c9a1c92d226f68e8ad8ba1e0a40/raw/e1e4a92f6072d15014f19aa8903d24a1ac0c41a4/nyan-cat.gif" alt="nyan-cat" width=720px />
+                    <img src="https://gist.githubusercontent.com/brudnak/aba00c9a1c92d226f68e8ad8ba1e0a40/raw/e1e4a92f6072d15014f19aa8903d24a1ac0c41a4/nyan-cat.gif"
+                        alt="nyan-cat" width=720px />
                 </div>
                 <div class="tag">#디자인_조금 #애니메이팅_조금 #영상_조금 #세무회계_조금 #초보_개발자 #잡동사니</div>
             </div>
         </div>
         <div class="bottom">
-                <div class="comment">
-                  <input type="text" class="commentbox" id="floatingInputGroup2" size=100 maxlength=150 placeholder="댓글을 입력하세요." required>
-                  <button type="submit" class="upload" >게시하기</span>
-                </div>
+            <div class="comment">
+                <input type="text" class="commentbox" id="cbox" size=100 maxlength=150 placeholder="댓글을 입력하세요."
+                    required>
+                <button id="postingbtn" type="submit" class="upload"
+                    style="background-color: #DA88FF; border-color: black; color: #2b082b;">게시하기</button>
+            </div>
+            <div class="comments mt" div id="comments">
+            </div>
         </div>
     </div>
 </body>
