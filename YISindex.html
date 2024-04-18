@@ -232,7 +232,7 @@
             <div class="notepad_writing">
               <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="floatingInput" placeholder="메모장">
-                <label for="floatingInput">메모3개까지 가능. 그이상은 전체삭제하고 다시 써주세요.</label>
+                <label for="floatingInput">입력 출력은 나중에 :)</label>
               </div>
               <!-- //form-floating mb-3 -->
               <div class="notepad_btn">
@@ -301,15 +301,15 @@
   import { writeBatch } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
     // Firebase 구성 정보 설정
-    const firebaseConfig = {
-      apiKey: "AIzaSyALCvTS0w8PDnupSIDwp-jlZmYiVk-0IkU",
-          authDomain: "sparta-3c679.firebaseapp.com",
-          projectId: "sparta-3c679",
-          storageBucket: "sparta-3c679.appspot.com",
-          messagingSenderId: "513535082637",
-          appId: "1:513535082637:web:19049a3cba86baf339e2c4",
-          measurementId: "G-BWQPHLCXVX" 
-    };
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyALCvTS0w8PDnupSIDwp-jlZmYiVk-0IkU",
+    //       authDomain: "sparta-3c679.firebaseapp.com",
+    //       projectId: "sparta-3c679",
+    //       storageBucket: "sparta-3c679.appspot.com",
+    //       messagingSenderId: "513535082637",
+    //       appId: "1:513535082637:web:19049a3cba86baf339e2c4",
+    //       measurementId: "G-BWQPHLCXVX" 
+    // };
 
 
     // Firebase 인스턴스 초기화
@@ -400,10 +400,10 @@
       const password = passwordInput.value.trim();
 
       // 비밀번호 입력 확인
-      if (password === '') {
-        alert('비밀번호를 입력해주세요.');
-        return; // 비밀번호가 입력되지 않았다면 함수를 여기서 종료
-      }
+      // if (password === '') {
+      //   alert('비밀번호를 입력해주세요.');
+      //   return; // 비밀번호가 입력되지 않았다면 함수를 여기서 종료
+      // }
 
 
       // 파이어베이스에 댓글과 비밀번호 저장
