@@ -14,32 +14,36 @@
         .top {
             display: flex;
             justify-content: flex-end;
+
         }
 
         .middle {
             display: flex;
             justify-content: center;
             gap: 50px;
-            background-color: black;
         }
 
         .left {
             width: 500px;
             height: 600px;
             background-color: antiquewhite;
+
+            background-image: url('https://cdn.discordapp.com/attachments/868151962623967276/1230321979370901698/image.png?ex=6632e5a2&is=662070a2&hm=7b3152cc510c8622ce3f1b44424a0b4331521987db3d77afdbb79e18ec0f44ad&');
+            background-position: center;
+            background-size: cover;
+            box-shadow: 8px 8px #B54756;
         }
 
         .right {
             display: flex;
             flex-direction: column;
             gap: 50px;
-            background-color: gray;
         }
 
         .text {
             width: 800px;
             height: 500px;
-            background-color: bisque;
+            background-color: #281517;
         }
 
         .tag {
@@ -52,6 +56,19 @@
             display: flex;
             justify-content: center;
             background-color: bisque;
+            margin: 25px 0;
+        }
+
+        .commentbox {
+            text-align: left;
+        }
+
+        .upload {
+            width: 84px;
+        }
+
+        body {
+            background-color: black;
         }
 
     </style>
@@ -60,7 +77,7 @@
 <body>
     <div class="main">
         <div class="top">
-            <button>작성</button>
+
         </div>
         <div class="middle">
             <div class="left"></div>
@@ -70,14 +87,10 @@
             </div>
         </div>
         <div class="bottom">
-            <ul class="comment">
-                <form id="commentFrm">
-                    <span class="ps_box">
-                        <input type="text" placeholder="댓글 내용을 입력해주세요." class="int" name="content" />
-                    </span>
-                    <button type="button" class="btn btn-danger">기록하기</button>
-                </form>
-            </ul>
+                <div class="comment">
+                  <input type="text" class="commentbox" id="floatingInputGroup2" size=100 maxlength=150 placeholder="댓글을 입력하세요." required>
+                  <button type="submit" class="upload" >게시하기</span>
+                </div>
         </div>
     </div>
 </body>
