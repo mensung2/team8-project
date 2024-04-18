@@ -322,34 +322,35 @@ function getCodeMessage(code) {
 ******************/
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getFirestore, collection, getDocs, setDoc,  } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 function dbWriteCommentAtDB(comment) {
-
+    
 }
 
 function dbDeleteCommentAtDB(comment) {
-
+    
 }
 
 function dbModifyCommentAtDB(comment) {
-
+    
 }
 
 function createDBInstance() {
-	const db = {};
+	const db = connectDB();
 	try {
 		const db = connectDB();
 	} catch(e) {
 		console.error('db연결 실패');
+		return {};
 	}
 	
 	console.log('db 연결 성공');
-
+   
 	db.writeComment = dbWriteCommentAtDB;
 	db.deleteComment = dbDeleteCommentAtDB;
 	db.modifyComment = dbModifyCommentAtDB;
-
+    
 	return db;
 }
 
@@ -361,10 +362,10 @@ function connectDB(){
 		storageBucket: "myproject-f0cda.appspot.com",
 		messagingSenderId: "632752137713",
 		appId: "1:632752137713:web:66746f134fb7f22d575050",
-		measurementId: "G-GC25C4MM0V"
+		measurementId: "G-GC25C4MM0V",
 	};
 
 	const app = initializeApp(firebaseConfig);
-
-	return {};
+	const fireStore = getFirestore(app);
+	return fireStore;
 }
