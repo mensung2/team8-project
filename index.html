@@ -4,35 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팔로민서조 소개 페이지</title>
-
+    <title>소개 페이지</title>
     <style>
-        div.member-card {
-            width: 500px;
-            border: solid 1px black;
+        .main {
+            width: 1400px;
+            margin: 100px auto 0px auto;
         }
+
+        .top {
+            display: flex;
+            justify-content: flex-end;
+
+        }
+
+        .middle {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .left {
+            width: 500px;
+            height: 600px;
+            background-color: antiquewhite;
+
+            background-image: url('https://cdn.discordapp.com/attachments/868151962623967276/1230321979370901698/image.png?ex=6632e5a2&is=662070a2&hm=7b3152cc510c8622ce3f1b44424a0b4331521987db3d77afdbb79e18ec0f44ad&');
+            background-position: center;
+            background-size: cover;
+            box-shadow: 8px 8px #B54756;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .text {
+            width: 800px;
+            height: 500px;
+            background-color: #281517;
+        }
+
+        .tag {
+            width: 800px;
+            height: 50px;
+            background-color: bisque;
+        }
+
+        .comment {
+            display: flex;
+            justify-content: center;
+            background-color: bisque;
+            margin: 25px 0;
+        }
+
+        .commentbox {
+            text-align: left;
+        }
+
+        .upload {
+            width: 84px;
+        }
+
+        body {
+            background-color: black;
+        }
+
     </style>
 </head>
 
 <body>
-    <div>8조</div>
-    
-    <div class="member-card">
-        <p> 이름: 최진욱 </p>
-        <p> 나이: 50살 </p>
-        <p> 성격: ABCD </p>
-        <a href="jinwuk.html">
-            <button>최진욱 소개 페이지로</button>
-        </a>
-    </div>
+    <div class="main">
+        <div class="top">
 
-    <div class="testName">
-        <h1>유인수</h1>
-        <h1>임현아</h1>
+        </div>
+        <div class="middle">
+            <div class="left"></div>
+            <div class="right">
+                <div class="text">내용</div>
+                <div class="tag">해시태그</div>
+            </div>
+        </div>
+        <div class="bottom">
+                <div class="comment">
+                  <input type="text" class="commentbox" id="floatingInputGroup2" size=100 maxlength=150 placeholder="댓글을 입력하세요." required>
+                  <button type="submit" class="upload" >게시하기</span>
+                </div>
+        </div>
     </div>
-
-    <script src="./index.js">
-    </script>
 </body>
 
 </html>
