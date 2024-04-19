@@ -35,14 +35,49 @@
                 </div>
             </div>
             <div class="comment">
-                <form id="com-fo">
-                    <label for="com">댓글</label>
-                    <input type="text">
-                    <input type="submit" value="작성">
+                <form onsubmit="addComment(event)">
+                  <div class="com-fo">
+                    <input type="text" class="form-control" placeholder="댓글을 입력하세요" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">작성</button>
                 </form>
-            </div>
+                <div class="comments mt-3">
+                </div>
+              </div>
         </div>
     </div>
 </div>
+
+<script>
+    function addComment(event) {
+        event.preventDefault();
+        const commentInput = event.target.querySelector("input");
+        const commentText = commentInput.value;
+        const date = new Date().toLocaleString();
+
+        const commentDiv = document.createElement("div");
+        commentDiv.className = "card my-3";
+
+        const cardBodyDiv = document.createElement("div");
+        cardBodyDiv.className = "card-body";
+
+         cardBodyDiv.innerHTML = `
+            <p class="card-text">${commentText} <span class="comment-time">${date}</span></p>
+            <div class="comment-buttons">
+                <button class="btn btn-sm btn-primary edit-btn">수정</button>
+                <button class="btn btn-sm btn-danger delete-btn">삭제</button>
+            </div>
+        `;
+
+        commentDiv.appendChild(cardBodyDiv);
+
+        const commentsDiv = event.target.parentNode.querySelector(".comments");
+        commentsDiv.insertBefore(commentDiv, commentsDiv.firstChild);
+
+        commentInput.value = "";
+      }
+
+</script>
+
 </body>
 </html>
