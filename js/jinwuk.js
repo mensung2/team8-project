@@ -76,7 +76,7 @@ function handleClickWriteButton() {
 	const { valid, code } = validateText(inputFieldText);
 	if (!valid) {
 		//유효하지 않은 이유 출력
-		alert(getMessageOfCode(code));
+		alert(getCodeMessage(code));
 
 		commentInputField.focus();
 		return;
@@ -108,8 +108,10 @@ function handleKeyupInputField(event) {
 }
 
 function handleClickModifyButton(event) {
-	//To-do: 이미 수정 버튼을 눌러서 수정가능한 경우의 처리
-
+	//To-do: 이미 같은 댓글의 수정 버튼을 또 누른 경우
+	//To-do: 이미 한 댓글의 수정 버튼을 눌렀는데 
+	//또 다른 댓글의 수정 버튼을 누른 경우 
+	
 	//수정버튼과 연결된 댓글내용 HTML요소
 	const span = event.target.parentElement.querySelector('span');
 
@@ -130,8 +132,7 @@ function handleClickModifyButton(event) {
 			const { valid, code } = validateText(commentText);
 			if (!valid) {
 				//유효하지 않은 이유 출력
-				alert(getMessageOfCode(code));
-				commentInputField.focus();
+				alert(getCodeMessage(code));
 				return;
 			}
 
@@ -177,31 +178,6 @@ function handleClickBackButton(event) {
 }
 
 
-
-/*****************
-  DB 관련 함수들
-******************/
-function createDBInstance() {
-	const db = {};
-
-	db.writeComment = dbWriteCommentAtDB;
-	db.deleteComment = dbDeleteCommentAtDB;
-	db.modifyComment = dbModifyCommentAtDB;
-
-	return db;
-}
-
-function dbWriteCommentAtDB(comment) {
-
-}
-
-function dbDeleteCommentAtDB(comment) {
-
-}
-
-function dbModifyCommentAtDB(comment) {
-
-}
 
 /********************
  컴포넌트 관련 함수들
@@ -263,21 +239,6 @@ function processCommentData(commentData) {
 	});
 }
 
-//db에서 불러온 댓글 데이터를 배열로 반환한다
-function loadCommentData(db) {
-	return loadDummyData();
-
-	function loadDummyData() {
-		return [
-			{ text: '안녕하세요' },
-			{ text: 'hello hello' },
-			{ text: "let's goooo" },
-			{ text: '리액트' },
-			{ text: '자바스크립트' },
-		];
-	}
-}
-
 function attachCommentToContainer(commentComponent) {
 	document.getElementById('comment-content-div')
 		.append(commentComponent);
@@ -331,10 +292,83 @@ function analyzeText(text){
 	}
 }
 
-function getMessageOfCode(code) {
+function getCodeMessage(code) {
 	const codeToMessageMap = {
 		'empty': '입력된 값이 없습니다. 값을 입력해주세요.',
 		'bad-word': '나쁜말을 사용하지 맙시다 ^^.',
 	};
 	return codeToMessageMap[code];
+}
+
+
+
+/*****************
+  DB 관련 함수들
+******************/
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+function dbWriteCommentAtDB(comment, commentId) {
+    //setDoc();
+}
+
+function dbDeleteCommentAtDB(comment, commentId) {
+    //deleteDoc();
+}
+
+function dbModifyCommentAtDB(comment, commentId) {
+    //setDoc();
+}
+
+function createDBInstance() {
+	const db = {};
+	try {
+		db = connectDB();
+	} catch(e) {
+		console.error('db연결 실패');
+		return {};
+	}
+	
+	console.log('db 연결 성공');
+   
+	db.writeComment = dbWriteCommentAtDB;
+	db.deleteComment = dbDeleteCommentAtDB;
+	db.modifyComment = dbModifyCommentAtDB;
+    
+	return db;
+}
+
+function connectDB(){
+	const firebaseConfig = {
+		apiKey: "AIzaSyCCKlWrDx64cWzF9mqSsnQrhizaM-aZxLg",
+		authDomain: "myproject-f0cda.firebaseapp.com",
+		projectId: "myproject-f0cda",
+		storageBucket: "myproject-f0cda.appspot.com",
+		messagingSenderId: "632752137713",
+		appId: "1:632752137713:web:66746f134fb7f22d575050",
+		measurementId: "G-GC25C4MM0V",
+	};
+
+	const app = initializeApp(firebaseConfig);
+	const fireStore = getFirestore(app);
+
+	return fireStore;
+}
+
+//db에서 불러온 댓글 데이터를 배열로 반환한다
+function loadCommentData(db) {
+	//getDocs();
+	
+	return loadDummyData();
+
+	function loadDummyData() {
+		return [
+			{ text: '안녕하세요' },
+			{ text: 'hello hello' },
+			{ text: "let's goooo" },
+			{ text: '리액트' },
+			{ text: '자바스크립트' },
+		];
+	}
 }
