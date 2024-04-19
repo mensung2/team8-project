@@ -2,18 +2,23 @@
 body {
     background-color: azure;
     width: 100%;
+}
+.back {
+    width: 100%;
     min-height: 100vh;
-
+    background: url(/image/universe.jpeg);
+    background-size: cover;
+    display: flex;
 }
 .wrap {
-    margin: 0 auto;
+    margin: 100px auto 0;
     width: 100%;
     height: 100%;;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     box-sizing: border-box;
-    background: url(/image/backround.jpeg);
-    background-size: cover;
+
 
     .center {
         width: 1350px;
