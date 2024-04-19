@@ -1,21 +1,33 @@
-.all{
-  background-color: white;
-}
 
+.all{
+  width: 100%;
+      height: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: url(/image/index-background.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover
+}
 
 .wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  
   width:70%;
   max-width: 1920px;
   margin: 0 auto;
   font-family: 'Noto Sans KR', sans-serif;
+
+  
+  
 }
 .header{
   margin-top: 20px;
-  color: rgb(121, 149, 177);
+  color: rgba(95, 152, 209, 0.925);
   
   font-weight: bolder;
   font-size: 35px
@@ -32,7 +44,7 @@
   position: relative;
   width: 500px;
   height: 700px;
-  background-color: rgb(121, 149, 177); 
+  background-color: rgb(95, 152, 209); 
 }
 
 
@@ -60,7 +72,6 @@
 .introduce{
   width: 800px;
   height: 600px;
-  background-color: white;
   margin-left: 50px;
   }
 .myself{
@@ -70,19 +81,20 @@
 .front{
   font-size: 20px;
   font-weight: bold;
-  color: rgb(102, 141, 180);
+  color: rgb(90, 143, 197);
 }
 
 .end{
   font-size: 20px;
   font-weight: bold;
+  color:rgb(102, 160, 219);
 }
 
 .img{
   position: relative;
-  background-image: url(/image/메모지2.png);                                                               
+  background-image: url(/image/메모지3.png);                                                               
   background-size: cover;
-  width: 680px;
+  width: 620px;
   height: 350px;
   background-size: cover; 
 }
@@ -103,7 +115,7 @@
 .hashtag {
   width: 800px;
   height: 50px;
-  color: rgb(121, 149, 177);
+  color: rgb(95, 152, 209);
   margin-top: 44px;
   margin-left: 50px;
   display: flex;
