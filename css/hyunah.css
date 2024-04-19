@@ -1,18 +1,25 @@
 
 body {
-    margin: 0;
+    background-color: azure;
     width: 100%;
-    box-sizing: border-box;
-
+}
+.back {
+    width: 100%;
+    min-height: 100vh;
+    background: url(/image/purple.png);
+    background-size: cover;
+    display: flex;
 }
 .wrap {
-    background-color: rgb(184, 199, 251);
-    margin: 0 auto;
-    width: 1400px;
-    height: auto;
-    margin-top: 100px;
+    margin: 100px auto 0;
+    width: 1350px;
+    height: 100%;;
+    background-color: azure;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+
 
     .center {
         width: 1350px;
@@ -90,14 +97,23 @@ body {
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        border: 1px solid black;
         box-sizing: border-box;
+        box-shadow: 4px 2px 2px 2px rgb(82, 82, 82);
         margin-top: 50px;
         font-size: 15px;
         font-weight: bolder;
         line-height: 24px;
 
+        form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
         .com-fo {
             font-size: 100%;
+
         }
 
     }
