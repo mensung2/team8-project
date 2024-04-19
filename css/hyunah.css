@@ -6,14 +6,15 @@ body {
 .back {
     width: 100%;
     min-height: 100vh;
-    background: url(/image/universe.jpeg);
+    background: url(/image/purple.png);
     background-size: cover;
     display: flex;
 }
 .wrap {
     margin: 100px auto 0;
-    width: 100%;
+    width: 1350px;
     height: 100%;;
+    background-color: azure;
     display: flex;
     flex-direction: column;
     align-items: center;
