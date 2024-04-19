@@ -5,7 +5,7 @@
 console.log('jinwuk.js loaded');
 
 const db = createDBInstance(); //미구현
-const commentData = loadCommentData(db);
+const commentData = await loadCommentData(db);
 
 //db에서 가져온 댓글이 있으면
 //댓글을 화면에 표시하고 댓글관련 UI를 킨다.
@@ -322,7 +322,7 @@ function dbModifyCommentAtDB(comment, commentId) {
 }
 
 function createDBInstance() {
-	const db = {};
+	let db = {};
 	try {
 		db = connectDB();
 	} catch(e) {
@@ -357,10 +357,17 @@ function connectDB(){
 }
 
 //db에서 불러온 댓글 데이터를 배열로 반환한다
-function loadCommentData(db) {
+async function loadCommentData(db) {
 	//getDocs();
-	
-	return loadDummyData();
+	const commentCol = collection(db, "comments");
+
+	const commentSnapshot = await getDocs(commentCol);
+
+	const commentList = commentSnapshot.docs.map(doc => doc.data())
+
+	console.log(commentList);
+
+	return commentList;
 
 	function loadDummyData() {
 		return [
