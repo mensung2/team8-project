@@ -68,7 +68,7 @@ function createLayoutOutlineHandler() {
 	return _handleLayoutOutlineHandler;
 }
 
-function handleClickWriteButton() {
+async function handleClickWriteButton() {
 	const commentInputField = document.getElementById('comment-input');
 
 	const inputFieldText = commentInputField.value;
@@ -84,12 +84,18 @@ function handleClickWriteButton() {
 
 	commentInputField.value = '';
 
-	const commentData = { text: inputFieldText };
-	const commentComponent = createCommentComponent(commentData);
-	attachCommentToContainer(commentComponent);
-	commentComponent.scrollIntoView();
+	const commentDataModel = {
+		text: inputFieldText,
+	};
 
-	db.writeComment(commentData);
+	const dbGeneratedId = await db.writeComment(commentDataModel);
+
+	commentDataModel.id = dbGeneratedId;	
+
+	const commentComponent = createCommentComponent(commentDataModel);
+	attachCommentToContainer(commentComponent);
+	
+	commentComponent.scrollIntoView();
 
 	if (getCommentNumber() === 1) {
 		setCommentUIVisibility(true);
@@ -125,7 +131,7 @@ function handleClickModifyButton(event) {
 
 	//To-do: 수정완료 버튼 추가
 	
-	function handleKeyup(event) {
+	async function handleKeyup(event) {
 		if (event.key === 'Enter' && !event.shift) {
 			const commentText = span.innerText;
 
@@ -136,7 +142,11 @@ function handleClickModifyButton(event) {
 				return;
 			}
 
-			db.writeComment(span.innerText);
+			const commentDataModel = {
+				text: span.innerText,
+			}
+
+			const dbGeneratedId = await db.modifyComment(commentDataModel);
 
 			span.contentEditable = false;
 
@@ -182,13 +192,14 @@ function handleClickBackButton(event) {
 /********************
  컴포넌트 관련 함수들
 *********************/
-function createCommentComponent(comment) {
-	const commentId = Symbol('commentId');
+function createCommentComponent(commentDataModel) {
+	console.log('call createCommentComponent(commentDataModel)')
+	console.log('\tcommentDataModel:', commentDataModel);
 
 	//댓글의 서브컴포넌트(댓글 내용, 삭제, 수정 버튼) 정보
-	const subComponentMap = [{
+	const subComponentInfos = [{
 		tagName: 'span',
-		innerText: comment.text,
+		innerText: commentDataModel.text,
 		className: 'a-comment-text',
 	}, {
 		tagName: 'button',
@@ -202,13 +213,16 @@ function createCommentComponent(comment) {
 		eventHandler: handleClickModifyButton,
 	}];
 
+	//메인 컴포넌트와 서브 컴포넌트에 공통으로 적용할 ID
+	const sharedId = commentDataModel.id;
+
 	//메인 컴포넌트
-	//역할: 아래 forEach에서 서브컴포넌트들을 하나로 묶는다.
+	//역할: 아래 forEach에서 서브 컴포넌트들을 하나로 묶는다.
 	const mainComponent = document.createElement('div');
 	mainComponent.setAttribute('class', 'a-comment');
-	mainComponent.commentId = commentId;
+	mainComponent.commentId = sharedId;
 
-	subComponentMap.forEach(info => {
+	subComponentInfos.forEach(info => {
 		const subc = document.createElement(info.tagName);
 		subc.innerText = info.innerText;
 		if (info.eventType) {
@@ -220,7 +234,7 @@ function createCommentComponent(comment) {
 
 		mainComponent.appendChild(subc);
 
-		subc.commentId = commentId;
+		subc.commentId = sharedId;
 	});
 
 	return mainComponent;
@@ -305,19 +319,23 @@ function getCodeMessage(code) {
 /*****************
   DB 관련 함수들
 ******************/
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { getFirestore, collection, doc, getDocs, addDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-function dbWriteCommentAtDB(comment, commentId) {
-    //setDoc();
+//역할: DB에 댓글을 쓰고 DB에서 생성된 ID를 반환
+async function dbWriteCommentAtDB(commentDataModel) {
+	const commentCol = collection(this, "comments");
+
+	const addedDoc = await addDoc(commentCol, commentDataModel);
+
+	return addedDoc.id;
 }
 
-function dbDeleteCommentAtDB(comment, commentId) {
+function dbDeleteCommentAtDB(commentId) {
     //deleteDoc();
 }
 
-function dbModifyCommentAtDB(comment, commentId) {
+function dbModifyCommentAtDB(commentDataModel, commentId) {
     //setDoc();
 }
 
@@ -325,20 +343,22 @@ function createDBInstance() {
 	let db = {};
 	try {
 		db = connectDB();
+		console.log('db 연결 성공');
 	} catch(e) {
 		console.error('db연결 실패');
 		return {};
 	}
 	
-	console.log('db 연결 성공');
-   
-	db.writeComment = dbWriteCommentAtDB;
+	//To do: Class로 바꾸기
+	db.writeComment = dbWriteCommentAtDB; //비동기함수
 	db.deleteComment = dbDeleteCommentAtDB;
 	db.modifyComment = dbModifyCommentAtDB;
     
 	return db;
 }
 
+//예외: 유효하지 않은 Config 전달
+//      컴퓨터가 오프라인
 function connectDB(){
 	const firebaseConfig = {
 		apiKey: "AIzaSyCCKlWrDx64cWzF9mqSsnQrhizaM-aZxLg",
@@ -356,19 +376,27 @@ function connectDB(){
 	return fireStore;
 }
 
-//db에서 불러온 댓글 데이터를 배열로 반환한다
+//요구사항: db에서 불러온 댓글 데이터를 배열로 반환한다
 async function loadCommentData(db) {
-	//getDocs();
 	const commentCol = collection(db, "comments");
 
 	const commentSnapshot = await getDocs(commentCol);
 
-	const commentList = commentSnapshot.docs.map(doc => doc.data())
+	const commentList = commentSnapshot.docs.map(doc => {
+		const data = doc.data();
+		return {
+			id: doc.id, 
+			text: data.text,
+		};
+	});
 
-	console.log(commentList);
+	//To do: log 함수 만들기
+	console.log('call loadCommentData(db)');
+	console.log('\tall documents in the comments collection');
+	console.log('\t', commentList);
 
 	return commentList;
-
+	//return loadDummyData();
 	function loadDummyData() {
 		return [
 			{ text: '안녕하세요' },
